@@ -2,24 +2,35 @@ import React, { useState } from 'react';
 import Signup from './Signup';
 
 
-const Register = ({ onSelectProfile }) => {
-  const [selectedProfile, setSelectedProfile] = useState('');
 
-  const handleProfileSelection = (profile) => {
-    setSelectedProfile(profile);
-  };
-
-  return (
-    <div>
-      <h2>Select your profile:</h2>
-      <button onClick={() => handleProfileSelection('student')}>Student</button>
-      <button onClick={() => handleProfileSelection('teacher')}>Teacher</button>
-      <button onClick={() => handleProfileSelection('parent')}>Parent</button>
-      <button onClick={selectedProfile && <Signup />}>Signup</button>
-      
-
-    </div>
-  );
-};
+function Register() {
+    const [selectedProfile, setSelectedProfile] = useState('');
+    const [showSignup, setShowSignup] = useState(false);
+  
+    const handleProfileSelection = (event) => {
+      setSelectedProfile(event.target.value);
+    };
+  
+    const handleSignup = () => {
+      setShowSignup(true);
+    };
+  
+    return (
+      <div>
+        <h2>Select your profile:</h2>
+        <select value={selectedProfile} onChange={handleProfileSelection}>
+          <option value="">-- Select Profile --</option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="parent">Parent</option>
+        </select>
+        <button onClick={handleSignup} disabled={!selectedProfile}>
+          Signup
+        </button>
+  
+        {showSignup && <Signup />}
+      </div>
+    );
+  }
 
 export default Register;
