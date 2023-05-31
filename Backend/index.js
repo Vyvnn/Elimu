@@ -13,5 +13,6 @@ const connectDB=()=>{
             console.log('Connected');
         });
 }
+
 connectdb()
 app.listen(3003);
