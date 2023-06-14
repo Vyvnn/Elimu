@@ -8,10 +8,7 @@ const Nav = () => {
 
     
             <div className="links">
-              
-            
-        
-            
+           
                 <a href="/"className>Home</a>
                 <a href="/register">Register</a>
                 {/* <a href="/parent">Parent</a>

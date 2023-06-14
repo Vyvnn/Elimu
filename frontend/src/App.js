@@ -5,6 +5,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Footer from './components/Footer';
 import Home from './components/home';
 import Profile from './components/profile';
+import Signin from './components/Signin';
 
 function App() {
   // const handleProfileSelection = (profile) => {
@@ -22,7 +23,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/profile" element={<Profile/>}/>
 
-        {/* <Route path="/register" element={<Register/>} /> */}
+        <Route path="/Signin" element={<Signin/>} />
         {/* <Route path="/parent" element={<h1>parent component</h1>}/>
         <Route path="/teachers" element={<h1>teacherscomponent</h1>}/> */}
         <Route path="/contact-us" element={<h1>contact-us component</h1>}/>

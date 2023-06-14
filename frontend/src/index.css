@@ -78,6 +78,21 @@ body{
 
 #profile:hover{
   cursor: pointer;
+  background-color:rgb(210, 201, 201);
 }
+.form-group{
+  margin: auto;
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+   }
 
+   div {
+    border-radius: 5px;
+        padding: 20px;
+  }
 
