@@ -24,6 +24,15 @@ const connectDB = () => {
 console.log(process.env.MONGODB_URI);
 connectDB();
 
+
+app.use(express.urlencoded({extended:false}))
+app.post("/register",async(req,res)=> {
+  try {
+
+  }catch{
+    
+  }
+})
 //routes
 app.get('/', (req, res) => {
   res.render("index.ejs");

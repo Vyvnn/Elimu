@@ -72,6 +72,7 @@ text-align:centre;
 
 }
 
+
 .logo {
   width: 70px; /* Adjust the width as per your requirements */
   height: 70px; /* This will maintain the aspect ratio */
@@ -96,3 +97,7 @@ text-align:centre;
     transform: rotate(360deg);
   }
 }
+
+
+
+

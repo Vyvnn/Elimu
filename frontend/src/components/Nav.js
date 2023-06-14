@@ -4,9 +4,7 @@ import React from "react";
 const Nav = () => {
     return (  
         <nav className="navbar">
-            <img src="./images/logo.avif" alt="logo" className="logo"
-            
-            />
+            <img src="./images/logo.avif" alt="logo" className="logo"/>
 
     
             <div className="links">
