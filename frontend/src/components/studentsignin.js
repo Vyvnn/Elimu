@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 
-const Signin = () => {
+const Studentsignin = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -32,13 +32,13 @@ const Signin = () => {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Username</label>
+              <label>StudentID</label>
               <input
                 type="text"
                 name="username"
                 className="form-control border border-dark rounded"
-                placeholder="Username"
-                value={formData.username}
+                placeholder=" enter StudentID"
+                value={formData.StudentID}
                 onChange={handleChange}
               />
             </div>
@@ -74,7 +74,7 @@ const Signin = () => {
             </div>
           </form>
           <p>
-            <a href="/forgot-password">Forgot password?</a>
+            <a href="/Signup">If not signed in,please Signup</a>
           </p>
         </div>
       </div>
@@ -82,4 +82,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Studentsignin;
