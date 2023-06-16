@@ -53,6 +53,20 @@ const Signin = () => {
                 onChange={handleChange}
               />
             </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control border border-dark rounded"
+                placeholder=" Confirm Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+
+
+
             <div>
               <button type="submit" className="btn btn-primary">
                 Sign in
