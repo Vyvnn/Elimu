@@ -4,16 +4,11 @@ import React from "react";
 const Nav = () => {
     return (  
         <nav className="navbar">
-            <img src="./images/logo.avif" alt="logo" className="logo"
-            
-            />
+            <img src="./images/logo.avif" alt="logo" className="logo"/>
 
     
             <div className="links">
-              
-            
-        
-            
+           
                 <a href="/"className>Home</a>
                 <a href="/register">Register</a>
                 {/* <a href="/parent">Parent</a>
