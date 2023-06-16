@@ -62,9 +62,9 @@ body{
 
 #profile{
   display: flex;
-  width: 60vh;
-  height: 20vh;
-  margin-top: 20vh;
+  width: 40%;
+  height: 12vh;
+  margin-top: 20%;
   margin-bottom: 10%;
   margin: auto;
   background-color: rgb(161, 154, 154);
@@ -98,4 +98,19 @@ body{
   .container{
     display:flex;
     margin:auto;
+    background-color: rgb(237, 229, 217,0.8);
+    height: 59vh;
+    width: 30%;
+    
   }
+#choose{
+  display:flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+  background-color: rgb(161, 154, 154);
+  height: 7vh;
+     width: 20%;
+   
+
+}

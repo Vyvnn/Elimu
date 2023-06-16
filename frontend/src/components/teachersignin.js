@@ -25,7 +25,7 @@ const Teachersignin = () => {
       }
     return (  
 
-        <div>
+       
             <div className="container">
       <div className="row justify-content-center">
         <div id="welcomeS">
@@ -77,11 +77,11 @@ const Teachersignin = () => {
             </div>
           </form>
           <p>
-            <a href="/Signup">If not signed in,please Signup</a>
+            <a href="/Signup">If not registered,please Signup</a>
           </p>
         </div>
       </div>
-    </div>
+   
 
 
 

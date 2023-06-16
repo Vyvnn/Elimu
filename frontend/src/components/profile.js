@@ -22,8 +22,8 @@ const Profile = () => {
 
   return (
     <div>
-      <div>
-        <p>Are you a:</p>
+      <div >
+        <strong><p id='choose'>Are you a:</p></strong>
       </div>
       <br />
       <button id="profile" onClick={() => handleProfileSelection('student')}>
