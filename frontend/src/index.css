@@ -83,8 +83,8 @@ body{
 .form-group{
   margin: auto;
   width: 70%;
-  padding: 12px 20px;
-  margin: 30px 0;
+  padding: 1% 1.5%;
+  margin: 1.2% 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -95,4 +95,7 @@ body{
     border-radius: 5px;
         padding: 20px;
   }
-
+  .container{
+    display:flex;
+    margin:auto;
+  }
