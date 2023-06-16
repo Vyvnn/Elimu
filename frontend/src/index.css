@@ -34,21 +34,24 @@
   flex-flow: column;
   margin: auto;
   height: 45vh;
-  background-color: white;
+  background-color: white; 
   width: 30vh;
   }
 #welcomesignin{
-  background-color: green;
+  background-color: skyblue;; 
   height: 14%;
   width: 70%;
   margin: auto;
-  color: white;
+  /* color: white; */
   border-style: none;
   
   }
+
+
+
    #welcomesignin:hover{
     cursor: pointer;
-    background-color:rgb(59, 136, 59);
+    background-color:rgb(142, 157, 142);
   }
 #welcome #profile  p{
   margin-top: 15%;

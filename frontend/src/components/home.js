@@ -11,7 +11,7 @@ const Home= () => {
 
   <h3>Elimu</h3>
 
-  <Link to={"/profile"}id="welcomesignin" ><button >SIGN IN 
+  <Link to={"/profile"}id="welcomesignin" ><button id="welcomesignin" >SIGN IN 
      
      </button></Link>
   
