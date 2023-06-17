@@ -40,6 +40,7 @@ const Parentsignin = () => {
                                 name="username"
                                 className="form-control border border-dark rounded"
                                 placeholder=" enter username"
+                                required
                                 value={formData.username}
                                 onChange={handleChange}
                             />

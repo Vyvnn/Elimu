@@ -38,6 +38,7 @@ const Studentsignin = () => {
                 name="username"
                 className="form-control border border-dark rounded"
                 placeholder=" enter StudentID"
+                required
                 value={formData.StudentID}
                 onChange={handleChange}
               />

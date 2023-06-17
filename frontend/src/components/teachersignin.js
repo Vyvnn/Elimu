@@ -41,6 +41,7 @@ const Teachersignin = () => {
                 name="username"
                 className="form-control border border-dark rounded"
                 placeholder=" enter your TSC NO"
+                required
                 value={formData.TSCNO}
                 onChange={handleChange}
               />

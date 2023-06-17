@@ -9,6 +9,9 @@ import Studentsignin from './components/studentsignin';
 import Parentsignin from './components/parentsignin';
 import Teachersignin from './components/teachersignin';
 import Parentmainpage from './components/parentmainpage';
+import Parentregister from './components/parentregister';
+import EmailValidation from './components/parentregister';
+import Studentregister from './components/studentregister';
 
 function App() {
   // const handleProfileSelection = (profile) => {
@@ -30,7 +33,10 @@ function App() {
         <Route path="/parentsignin" element={<Parentsignin/>}/>
         <Route path="/teachersignin" element={<Teachersignin/>}/>
         <Route path="/parentmainpage" element={<Parentmainpage/>}/>
-        {/* <Route path="/Signup" element={<Signup/>}/> */} 
+        <Route path="/parentregister" element={<Parentregister/>}/>
+        <Route path="/emailvalidation" element={<EmailValidation/>}/>
+        <Route path="/studentregister" element={<Studentregister/>}/>
+
       </Routes>
       </BrowserRouter>
       
