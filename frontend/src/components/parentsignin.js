@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
-
+import Parentmainpage from './parentmainpage';
+import { Link } from "react-router-dom";
 
 const Parentsignin = () => {
     const [formData, setFormData] = useState({
@@ -71,9 +71,13 @@ const Parentsignin = () => {
 
 
                         <div>
-                            <button type="submit" className="btn btn-primary">
+                        <Link to={"/parentmainpage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
-                            </button>
+                            </button> </Link>
+
+
+
+
                         </div>
                     </form>
                     <p>

@@ -28,7 +28,7 @@ const EmailValidation = () => {
         className={isValid ? 'success' : 'error'}
       />
       <br />
-      <span>Enter a valid email address (alphanumeric characters, '@', and subsequent '.', maximum 30 characters).</span>
+    
     </div>
   );
 };
