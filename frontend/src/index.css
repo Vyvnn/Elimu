@@ -117,3 +117,14 @@ body{
    
 
 }
+
+#parentpage{
+  display: flex;
+align-items: left;
+background-color:bisque;
+
+}
+#icon {width: 50%;
+
+}
+

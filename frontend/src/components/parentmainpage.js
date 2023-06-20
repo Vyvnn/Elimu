@@ -10,15 +10,15 @@ const Parentmainpage = () => {
   };
 
   return (
-    <div>
-      <h1>Student List</h1>
+    <div id='parentpage'>
+    
       <div>
         {Studentdata
           .sort((a, b) => a.id - b.id) // Sort by oldest child to youngest
           .map((child) => (
             
             <div key={child.id} onClick={() => handleChildSelection(child)}>
-              <img src={child.picture} alt={child.name} />
+              <img src='images/icon.jpg'  id='icon' alt={child.name} />
               <h2>{child.name}</h2>
               <p>{child.grade}</p>
               <p>{child.school}</p>

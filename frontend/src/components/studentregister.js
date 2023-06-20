@@ -8,8 +8,8 @@ const Studentregister = () => {
 
   return (
 
-    <div>
-      <label htmlFor="full-name">FULL NAMES</label>
+    <div className="form-group">
+      <label htmlFor="full-name">Full Names</label>
       <input type="text" placeholder="Enter Full name" name="full-name" id="full-name" required />
 
       <div>
@@ -33,15 +33,16 @@ const Studentregister = () => {
         <option value="Business Studies">Business Studies</option>
       </select>
 
-
+      <br />
+      <br />
       <label for="interests">Choose a interest:</label>
 
       <select id="interests">
-      <option value="Sports">Sports</option>
-      <option value="Programming">Programming</option>
-      <option value="Yoga">Yoga</option>
-      <option value="Cooking">Cooking</option>
-      <option value="Robotics">Robotics</option>
+        <option value="Sports">Sports</option>
+        <option value="Programming">Programming</option>
+        <option value="Yoga">Yoga</option>
+        <option value="Cooking">Cooking</option>
+        <option value="Robotics">Robotics</option>
       </select>
     </div>
 
