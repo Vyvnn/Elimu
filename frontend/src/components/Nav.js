@@ -1,5 +1,5 @@
 import React from "react";
-// import {links} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Nav = () => {
     return (  
@@ -8,13 +8,16 @@ const Nav = () => {
 
     
             <div className="links">
+           <Link to='/'>Home</Link>
+           <Link to='/profile'>Profile</Link>
+           <Link to='/parentmainpage'>Parent</Link>
+           <Link to='/studentmainpage'>Student</Link>
+           <Link to='/teachermainpage'>Teacher</Link>
            
-                <a href="/"className>Home</a>
-                <a href="/register">Register</a>
-                {/* <a href="/parent">Parent</a>
-                <a href="/teachers">Teachers</a> */}
-                <a href="/contact-us">Contact_us</a>
-                <a href="/Signup">Sign Up</a>
+
+
+                
+                
 
             </div>
         </nav>

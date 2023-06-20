@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Studentdata from './studentdata';
-import {FaUserCircle} from 'react-icons/fa'
+
 
 const Parentmainpage = () => {
   const [selectedChild, setSelectedChild] = useState(null);
