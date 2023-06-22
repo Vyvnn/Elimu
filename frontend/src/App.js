@@ -1,7 +1,7 @@
 
 import './App.css';
 import Nav from './components/Nav'
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import {BrowserRouter,Routes ,Route} from 'react-router-dom'
 import Footer from './components/Footer';
 import Home from './components/home';
 import Profile from './components/profile';
@@ -12,6 +12,7 @@ import Parentmainpage from './components/parentmainpage';
 import Parentregister from './components/parentregister';
 import EmailValidation from './components/parentregister';
 import Studentregister from './components/studentregister';
+
 
 function App() {
   // const handleProfileSelection = (profile) => {
@@ -36,6 +37,17 @@ function App() {
         <Route path="/parentregister" element={<Parentregister/>}/>
         <Route path="/emailvalidation" element={<EmailValidation/>}/>
         <Route path="/studentregister" element={<Studentregister/>}/>
+        {/* <AuthProvider>
+              <Switch>
+          <Route exact path="/signin">
+            <ParentComponent />
+          </Route>
+          <PrivateRoute path="/parentmainpage">
+            <Parentmainpage />
+          </PrivateRoute>
+        </Switch>
+     
+    </AuthProvider> */}
 
       </Routes>
       </BrowserRouter>

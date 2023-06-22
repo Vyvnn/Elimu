@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [parentName, setParentName] = useState('');
@@ -12,11 +12,12 @@ const RegistrationForm = () => {
 
     const handleChildChange = (e) => {
       setSelectedChild(e.target.value);
+      setSelectedGrade(e.target.value);
     };
 
-    // const handleChildChange = (e) => {
-    //   setSelectedGrade(e.target.value);
-    // };
+   
+    
+  
     const handleSubmit = (e) => {
       e.preventDefault();
     // Create an object with the form data
@@ -93,8 +94,11 @@ const RegistrationForm = () => {
        
     
      {/* Other form inputs for password, child's name, grade, etc. */}
-      <br />
-      <button type="submit">Register</button>
+     <div>
+     <Link to={"/parentsignin"} ><button type="submit" className="btn btn-primary">
+Register
+    </button> </Link>
+</div>
     </form>
     </div>
   );
