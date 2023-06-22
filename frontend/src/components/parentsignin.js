@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Parentsignin = () => {
     const [formData, setFormData] = useState({
-        username: '',
+        parentsname: '',
         password: ''
     });
 
@@ -34,19 +34,19 @@ const Parentsignin = () => {
                 <div className="col-md-6">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label>username</label>
+                            <label>Parent's Name:</label>
                             <input
                                 type="text"
-                                name="username"
+                                name="parentsname"
                                 className="form-control border border-dark rounded"
                                 placeholder=" enter username"
                                 required
-                                value={formData.username}
+                                value={formData.parentsname}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>Password: </label>
                             <input
                                 type="password"
                                 name="password"
@@ -57,7 +57,7 @@ const Parentsignin = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label> Confirm Password:</label>
                             <input
                                 type="password"
                                 name="password"

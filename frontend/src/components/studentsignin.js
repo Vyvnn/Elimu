@@ -32,7 +32,7 @@ const Studentsignin = () => {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>StudentID</label>
+              <label>StudentID:</label>
               <input
                 type="text"
                 name="username"
@@ -44,7 +44,7 @@ const Studentsignin = () => {
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label>Password:</label>
               <input
                 type="password"
                 name="password"
@@ -55,7 +55,7 @@ const Studentsignin = () => {
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label>Password:</label>
               <input
                 type="password"
                 name="password"
