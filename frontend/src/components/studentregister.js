@@ -95,10 +95,10 @@ const StudentRegister = () => {
         </select>
 
         <div>
-        <Link to={"/studentmainpage"} ><button type="submit" className="btn btn-primary">
-Register
-    </button> </Link>
-</div>
+          <Link to={"/studentmainpage"} ><button type="submit" className="btn btn-primary">
+            Register
+          </button> </Link>
+        </div>
 
       </div>
     </form>

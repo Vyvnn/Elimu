@@ -12,6 +12,7 @@ import Parentmainpage from './components/parentmainpage';
 import Parentregister from './components/parentregister';
 import EmailValidation from './components/parentregister';
 import Studentregister from './components/studentregister';
+import Teacherregister from './components/teacherregister';
 
 
 function App() {
@@ -37,6 +38,11 @@ function App() {
         <Route path="/parentregister" element={<Parentregister/>}/>
         <Route path="/emailvalidation" element={<EmailValidation/>}/>
         <Route path="/studentregister" element={<Studentregister/>}/>
+        <Route path="/teacherregister" element={<Teacherregister/>}/>
+        <Route path="/teacherregister" element={<Teacherregister/>}/>
+
+
+   
         {/* <AuthProvider>
               <Switch>
           <Route exact path="/signin">
