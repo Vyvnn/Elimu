@@ -100,10 +100,12 @@ body{
   }
   .container{
     display:flex;
+    flex-direction: column;
     margin:auto;
+    align-items: center;
     background-color: rgb(237, 229, 217,0.8);
     height: 59vh;
-    width: 30%;
+    width: 60%;
     
   }
 #choose{

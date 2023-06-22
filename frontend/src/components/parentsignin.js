@@ -80,8 +80,11 @@ const Parentsignin = () => {
 
                         </div>
                     </form>
+
+                    
+
                     <p>
-                        <a href="/Signup">If not registered,please Signup</a>
+                        <a href="/parentregister">If not registered,please Signup</a>
                     </p>
                 </div>
             </div>
