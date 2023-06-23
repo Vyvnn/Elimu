@@ -6,13 +6,14 @@ import Footer from './components/Footer';
 import Home from './components/home';
 import Profile from './components/profile';
 import Studentsignin from './components/studentsignin';
-import Parentsignin from './components/parentsignin';
+import ParentSignin from './components/parentsignin'
 import Teachersignin from './components/teachersignin';
-import Parentmainpage from './components/parentmainpage';
-import Parentregister from './components/parentregister';
-import EmailValidation from './components/parentregister';
+import ParentRegister from './components/parentregister'
 import Studentregister from './components/studentregister';
 import Teacherregister from './components/teacherregister';
+import Studentmainpage from './components/studentmainpage';
+import ParentMainPage from './components/parentmainpage';
+import TeacherMainPage from './components/teacherMainPage';
 
 
 function App() {
@@ -32,15 +33,15 @@ function App() {
         <Route path="/profile" element={<Profile/>}/>
 
         <Route path="/studentsignin" element={<Studentsignin/>} />
-        <Route path="/parentsignin" element={<Parentsignin/>}/>
+        <Route path="/parentSignin" element={<ParentSignin/>}/>
         <Route path="/teachersignin" element={<Teachersignin/>}/>
-        <Route path="/parentmainpage" element={<Parentmainpage/>}/>
-        <Route path="/parentregister" element={<Parentregister/>}/>
-        <Route path="/emailvalidation" element={<EmailValidation/>}/>
+       
+        <Route path="/parentRegister" element={<ParentRegister/>}/>
         <Route path="/studentregister" element={<Studentregister/>}/>
         <Route path="/teacherregister" element={<Teacherregister/>}/>
-        <Route path="/teacherregister" element={<Teacherregister/>}/>
-
+        <Route path="/parentMainPage" element={<ParentMainPage/>}/>
+        <Route path="/studentmainpage" element={<Studentmainpage/>}/>
+        <Route path="/teacherMainPage" element={<TeacherMainPage/>}/>
 
    
         {/* <AuthProvider>

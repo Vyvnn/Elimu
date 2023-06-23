@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Link } from "react-router-dom";
 
-const Parentsignin = () => {
+const ParentSignin = () => {
     const [formData, setFormData] = useState({
         parentsname: '',
         password: ''
@@ -71,7 +71,7 @@ const Parentsignin = () => {
 
 
                         <div>
-                        <Link to={"/parentmainpage"} ><button type="submit" className="btn btn-primary">
+                        <Link to={"/parentMainPage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
                             </button> </Link>
 
@@ -84,7 +84,7 @@ const Parentsignin = () => {
                     
 
                     <p>
-                        <a href="/parentregister">If not registered,please Signup</a>
+                        <a href="/parentRegister">If not registered,please Signup</a>
                     </p>
                 </div>
             </div>
@@ -93,4 +93,4 @@ const Parentsignin = () => {
 };
 
 
-export default Parentsignin;
+export default ParentSignin;

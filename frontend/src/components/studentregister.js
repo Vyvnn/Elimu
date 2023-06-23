@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EmailValidation from "./emailvalidation";
+
 import { Link } from 'react-router-dom';
 
 const StudentRegister = () => {
@@ -18,7 +18,7 @@ const StudentRegister = () => {
       case "email":
         setEmail(value);
         break;
-      case "class":
+      case "studentClass":
         setStudentClass(value);
         break;
       case "subjects":
@@ -50,7 +50,7 @@ const StudentRegister = () => {
           <label htmlFor="email">Email</label>
           <input type="text" placeholder="Enter Email" name="email" id="email" maxLength="8" value={email} onChange={handleChange} required />   </div>
 
-        <label htmlFor="class"> Select Class</label>
+        <label htmlFor="studentClass"> Select Class</label>
 
         <select value={setStudentClass} onChange={handleChildChange}>
 

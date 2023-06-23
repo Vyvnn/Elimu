@@ -1,19 +1,19 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const express = require ('express')
 const app= express();
 
-// app.get('/',(req,res)=>{
-// res.json({message: 'Welcome to the Elimu app'})
+app.get('/',(req,res)=>{
+res.json({message: 'Welcome to the Elimu app'})
 
 
-// })
+})
 
-app.listen(process.env.PORT,()=>{
+app.listen(3003,()=>{
     console.log('listen to port 3003')
 })
 
-process.env
+
 
 
 

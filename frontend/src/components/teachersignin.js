@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Teachersignin = () => {
     const [formData, setFormData] = useState({
@@ -69,16 +71,16 @@ const Teachersignin = () => {
               />
             </div>
 
+<div>
 
+            <Link to={"/teachermainpage"} ><button type="submit" className="btn btn-primary">
+                                Sign in
+                            </button> </Link>
 
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Sign in
-              </button>
-            </div>
+                            </div>
           </form>
           <p>
-            <a href="/Signup">If not registered,please Signup</a>
+            <a href="/teacherregister">If not registered,please Signup</a>
           </p>
         </div>
       </div>

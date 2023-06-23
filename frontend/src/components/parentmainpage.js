@@ -1,56 +1,73 @@
 import React, { useState } from 'react';
-import Studentdata from './studentdata';
 
+import TeacherMainPage from './teacherMainPage';
+import Studentmainpage from './studentmainpage'
 
-const Parentmainpage = () => {
-  const [selectedChild, setSelectedChild] = useState(null);
+// Student Performance Component (unchanged)
 
-  const handleChildSelection = (child) => {
-    setSelectedChild(child);
+// Data Display Component (unchanged)
+
+// Parent Dashboard Component
+function ParentMainPage({ studentData }) {
+  const [selectedStudentId, setSelectedStudentId] = useState('');
+
+  const handleStudentSelect = (e) => {
+    setSelectedStudentId(e.target.value);
   };
 
-  return (
-    <div id='parentpage'>
-    
-      <div>
-        {Studentdata
-          .sort((a, b) => a.id - b.id) // Sort by oldest child to youngest
-          .map((child) => (
-            
-            <div key={child.id} onClick={() => handleChildSelection(child)}>
-              <img src='images/icon.jpg'  id='icon' alt={child.name} />
-              <h2>{child.name}</h2>
-              <p>{child.grade}</p>
-              <p>{child.school}</p>
-            </div>
-          ))}
-      </div>
-      
+  const selectedStudent = studentData.find((student) => student.id === selectedStudentId);
 
-      {selectedChild && (
+  return (
+    <div>
+      <h3>Parent Dashboard</h3>
+      <label>
+        Select Student:
+        <select value={selectedStudentId} onChange={handleStudentSelect}>
+          <option value="">-- Select Student --</option>
+          {studentData.map((student) => (
+            <option key={student.id} value={student.id}>
+              {student.name}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {selectedStudent && (
         <div>
-          <h1>Child Details</h1>
-          <h2>{selectedChild.name}</h2>
-          <p>Grade: {selectedChild.grade}</p>
-          <h3>Attendance: {selectedChild.attendance}%</h3>
-          <p>Performance: {selectedChild.performance}</p>
-          <h3>Assessment Results</h3>
-          <ul>
-            {selectedChild.assessmentResults.map((result, index) => (
-              <li key={index}>Assessment {index + 1}: {result}</li>
-            ))}
-          </ul>
-          <p>Syllabus Coverage: {selectedChild.syllabusCoverage}%</p>
-          <h3>Teacher Remarks</h3>
-          <ul>
-            {selectedChild.teacherRemarks.map((remark, index) => (
-              <li key={index}>{remark}</li>
-            ))}
-          </ul>
+          <h4>Student Details</h4>
+          <p>Name: {selectedStudent.name}</p>
+          <p>Class/Form: {selectedStudent.class}</p>
+          <p>Subjects Taken: {selectedStudent.subjects.join(', ')}</p>
+          <p>Teacher's Name: {selectedStudent.teacher}</p>
+          <p>Teacher's Remark: {selectedStudent.remark}</p>
         </div>
       )}
     </div>
   );
-};
+}
 
-export default Parentmainpage;
+// App Component (with ParentDashboard)
+function App() {
+  const [subject, setSubject] = useState('');
+  const [studentData, setStudentData] = useState([]);
+
+  const handleSubjectSubmit = (selectedSubject) => {
+    setSubject(selectedSubject);
+  };
+
+  const handleSavePerformance = (performanceData) => {
+    const updatedData = [...studentData, { id: Date.now(), ...performanceData }];
+    setStudentData(updatedData);
+  };
+
+  return (
+    <div>
+      <TeacherForm onSubmit={handleSubjectSubmit} />
+      <StudentPerformance onSave={handleSavePerformance} />
+      <DataDisplay subject={subject} studentData={studentData} />
+      <ParentDashboard studentData={studentData} />
+    </div>
+  );
+}
+
+export default ParentMainPage;
