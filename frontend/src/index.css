@@ -29,13 +29,26 @@
 .navbar a :hover{
   color:#f1356d
 }
+
+.homepage{
+  background-image: url(/public/images/homepic3.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 500px;
+}
+
 #welcome{
   display: flex;
-  flex-flow: column;
-  margin: auto;
+  flex-flow:column;
+ 
   height: 45vh;
-  background-color: rgb(210, 201, 201); 
+  background-color: transparent; 
   width: 30vh;
+  }
+
+  #welcome p{
+    animation-duration: 2s;
   }
 #welcomesignin{
   background-color: skyblue;; 
@@ -134,6 +147,10 @@ background-color:bisque;
   background-color: #a09696;
   border-radius: 20px;
   padding: 40px;
+  background-image: url(/public/images/pexels-photo-267885.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
   
 }
 .contact_us ul li {
@@ -160,3 +177,4 @@ background-color:bisque;
   color: #fff;
   font-weight: 700;
 }
+
