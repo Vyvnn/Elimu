@@ -95,7 +95,7 @@ const StudentRegister = () => {
         </select>
 
         <div>
-          <Link to={"/studentmainpage"} ><button type="submit" className="btn btn-primary">
+          <Link to={"/studentsignin"} ><button type="submit" className="btn btn-primary">
             Register
           </button> </Link>
         </div>

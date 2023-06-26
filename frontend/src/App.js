@@ -14,6 +14,8 @@ import Teacherregister from './components/teacherregister';
 import Studentmainpage from './components/studentmainpage';
 import ParentMainPage from './components/parentmainpage';
 import TeacherMainPage from './components/teacherMainPage';
+import SubjectSelectPage from './components/subjectsSelectPage';
+
 
 
 function App() {
@@ -39,9 +41,11 @@ function App() {
         <Route path="/parentRegister" element={<ParentRegister/>}/>
         <Route path="/studentregister" element={<Studentregister/>}/>
         <Route path="/teacherregister" element={<Teacherregister/>}/>
-        <Route path="/parentMainPage" element={<ParentMainPage/>}/>
+        <Route path="/parentmainpage" element={<ParentMainPage/>}/>
+       
         <Route path="/studentmainpage" element={<Studentmainpage/>}/>
-        <Route path="/teacherMainPage" element={<TeacherMainPage/>}/>
+        <Route path="/teacherMainpage" element={<TeacherMainPage/>}/>
+        <Route path="/subjectsSelectPage" element={<SubjectSelectPage />} />
 
    
         {/* <AuthProvider>

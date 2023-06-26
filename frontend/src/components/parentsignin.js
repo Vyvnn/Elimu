@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
-
 import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 const ParentSignin = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         parentsname: '',
         password: ''
     });
+
+
+   // eslint-disable-next-line
+const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
+  
+    const users = [{ parentsname: "Jane", password: "testpassword" }];
+    const account = users.find((user) => user.parentsname === formData.parentsname);
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -18,11 +29,25 @@ const ParentSignin = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Perform login logic here
-        // You can access form data from the 'formData' state
+      
+        if (account && account.password === formData.password) {
+          setauthenticated(true);
+          localStorage.setItem("authenticated", true);
+          navigate("/parentmainpage");
+        }
         console.log(formData);
 
-    }
+        if (!authenticated) {
+            return <Navigate replace to="/login" />;
+          } else {
+            return (
+              <div>
+                <p>Welcome to your Dashboard</p>
+              </div>
+            );
+          }
+      };
+      
     return (
 
         <div className="container">
@@ -68,20 +93,12 @@ const ParentSignin = () => {
                             />
                         </div>
 
-
-
                         <div>
                         <Link to={"/parentMainPage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
                             </button> </Link>
-
-
-
-
                         </div>
                     </form>
-
-                    
 
                     <p>
                         <a href="/parentRegister">If not registered,please Signup</a>
