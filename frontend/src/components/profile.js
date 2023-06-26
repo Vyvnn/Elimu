@@ -12,11 +12,11 @@ const Profile = () => {
 
     // Redirect the user to the appropriate sign-in page based on the role
     if (role === 'student') {
-     navigate('/studentsignin');
+     navigate('/student/studentsignin');
     } else if (role === 'parent') {
-      navigate('/parentsignin');
+      navigate('/parent/parentsignin');
     } else if (role === 'teacher') {
-      navigate('/teachersignin');
+      navigate('/teacher/teachersignin');
     }
   };
 

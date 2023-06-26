@@ -90,7 +90,7 @@ const TeacherRegister = () => {
         />
     </div>
 <div>
-    <Link to={"/teachermainpage"} ><button type="submit" className="btn btn-primary">
+    <Link to={"teacher/teachermainpage"} ><button type="submit" className="btn btn-primary">
 Register
     </button> </Link>
     </div>

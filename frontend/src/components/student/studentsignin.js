@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../index.css';
+import '../../index.css';
 import { Link } from 'react-router-dom';
 
 const Studentsignin = () => {
@@ -62,6 +62,7 @@ const Studentsignin = () => {
                 name="password"
                 className="form-control border border-dark rounded"
                 placeholder=" Confirm Password"
+                required
                 value={formData.password}
                 onChange={handleChange}
               />
@@ -70,7 +71,7 @@ const Studentsignin = () => {
 
 
             <div>
-              <Link to="/subjectsSelectPage"><button type="submit" className="btn btn-primary">
+              <Link to="student/subjectsSelectPage"><button type="submit" className="btn btn-primary">
                 Sign in
               </button>
               </Link>
@@ -80,7 +81,7 @@ const Studentsignin = () => {
      
 
           <p>
-            <a href="/studentregister">If not registered,please Signup</a>
+            <a href="student/studentregister">If not registered,please Signup</a>
           </p>
         </div>
       </div>

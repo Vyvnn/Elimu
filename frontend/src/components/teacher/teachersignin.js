@@ -73,14 +73,14 @@ const Teachersignin = () => {
 
 <div>
 
-            <Link to={"/teachermainpage"} ><button type="submit" className="btn btn-primary">
+            <Link to={"teacher/teachermainpage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
                             </button> </Link>
 
                             </div>
           </form>
           <p>
-            <a href="/teacherregister">If not registered,please Signup</a>
+            <a href="teacher/teacherregister">If not registered,please Signup</a>
           </p>
         </div>
       </div>

@@ -94,14 +94,14 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
                         </div>
 
                         <div>
-                        <Link to={"/parentMainPage"} ><button type="submit" className="btn btn-primary">
+                        <Link to={"/parent/parentMainPage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
                             </button> </Link>
                         </div>
                     </form>
 
                     <p>
-                        <a href="/parentRegister">If not registered,please Signup</a>
+                        <a href="/parent/parentRegister">If not registered,please Signup</a>
                     </p>
                 </div>
             </div>

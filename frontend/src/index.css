@@ -130,3 +130,33 @@ background-color:bisque;
 
 }
 
+.contact_us {
+  background-color: #a09696;
+  border-radius: 20px;
+  padding: 40px;
+  
+}
+.contact_us ul li {
+  display: inline-block;
+  border-bottom: 1px solid rgba(103, 98, 98, 0.15);
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.contact_us ul li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.contact_us ul li h6 {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.contact_us ul li span {
+  display: block;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+}

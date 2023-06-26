@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 
-const ParentMainPage = ({ StudentData }) => {
+const studentData = [
+  { id: 1, name: "John", class: "Grade 10", subjects: ["Math", "Science"], teacher: "Mr. Smith", remark: "Good student" },
+  { id: 2, name: "Jane", class: "Grade 9", subjects: ["English", "History"], teacher: "Ms. Johnson", remark: "Hardworking student" }
+];
+
+const ParentMainPage = ({ studentData }) => {
   const [selectedStudentId, setSelectedStudentId] = useState('');
 
   const handleStudentSelect = (e) => {
     setSelectedStudentId(e.target.value);
   };
 
-  const selectedStudent = StudentData((student) => student.id === selectedStudentId);
+  const selectedStudent = studentData.find((student) => student.id === selectedStudentId);
 
   if (selectedStudent) { 
     return (
@@ -17,7 +22,7 @@ const ParentMainPage = ({ StudentData }) => {
           Select Student:
           <select value={selectedStudentId} onChange={handleStudentSelect}>
             <option value="">-- Select Student --</option>
-            {StudentData.map((student) => (
+            {studentData.map((student) => (
               <option key={student.id} value={student.id}>
                 {student.name}
               </option>

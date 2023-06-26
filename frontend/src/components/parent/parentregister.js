@@ -109,7 +109,7 @@ const Parentregister = () => {
 
           {/* Other form inputs for password, child's name, grade, etc. */}
           <div>
-            <Link to={"/parentMainPage"} ><button type="submit" className="btn btn-primary">
+            <Link to={"parent/parentMainPage"} ><button type="submit" className="btn btn-primary">
               Register
             </button> </Link>
           </div>
