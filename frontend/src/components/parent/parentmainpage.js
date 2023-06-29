@@ -1,54 +1,46 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// const studentData = [
-//   { id: 1, name: "John", class: "Grade 10", subjects: ["Math", "Science"], teacher: "Mr. Smith", remark: "Good student" },
-//   { id: 2, name: "Jane", class: "Grade 9", subjects: ["English", "History"], teacher: "Ms. Johnson", remark: "Hardworking student" }
-// ];
+const ParentMainPage = ({ getStudentDetails }) => {
+  const [parentName, setParentName] = useState('');
+  const [studentId, setStudentId] = useState('');
+  const [studentDetails, setStudentDetails] = useState('');
+  const [error, setError] = useState('');
 
-// const ParentMainPage = ({ studentData }) => {
-//   const [selectedStudentId, setSelectedStudentId] = useState('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-//   const handleStudentSelect = (e) => {
-//     setSelectedStudentId(e.target.value);
-//   };
+    try {
+      const response = await getStudentDetails(parentName, studentId);
+      setStudentDetails(response);
+      setError('');
+    } catch (error) {
+      setError('Error retrieving student');
+      setStudentDetails('');
+    }
+  };
 
-//   const selectedStudent = studentData.find((student) => student.id === selectedStudentId);
+  return (
+    <div>
+      <h1>Parent Page</h1>
 
-//   if (selectedStudent) { 
-//     return (
-//       <div>
-//         <h3>Parent Dashboard</h3>
-//         <label>
-//           Select Student:
-//           <select value={selectedStudentId} onChange={handleStudentSelect}>
-//             <option value="">-- Select Student --</option>
-//             {studentData.map((student) => (
-//               <option key={student.id} value={student.id}>
-//                 {student.name}
-//               </option>
-//             ))}
-//           </select>
-//         </label>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Parent Name:
+          <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Student ID:
+          <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
+        </label>
+        <br />
+        <button type="submit">Get Student Details</button>
+      </form>
 
-//         {selectedStudent && (
-//           <div>
-//             <h4>Student Details</h4>
-//             <p>Name: {selectedStudent.name}</p>
-//             <p>Class/Form: {selectedStudent.class}</p>
-//             <p>Subjects Taken: {selectedStudent.subjects.join(', ')}</p>
-//             <p>Teacher's Name: {selectedStudent.teacher}</p>
-//             <p>Teacher's Remark: {selectedStudent.remark}</p>
-//           </div>
-//         )}
-//       </div>
-//     );
-//   } else {
-//     return (
-//       <div>
-//         {/* Render a message or fallback UI */}
-//       </div>
-//     );
-//   }
-// };
+      {studentDetails && <p>{studentDetails}</p>}
+      {error && <p>{error}</p>}
+    </div>
+  );
+};
 
-// export default ParentMainPage;
+export default ParentMainPage;
