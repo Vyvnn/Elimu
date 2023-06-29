@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Teachersignin = () => {
     const [formData, setFormData] = useState({
@@ -25,7 +27,7 @@ const Teachersignin = () => {
       }
     return (  
 
-        <div>
+       
             <div className="container">
       <div className="row justify-content-center">
         <div id="welcomeS">
@@ -41,6 +43,7 @@ const Teachersignin = () => {
                 name="username"
                 className="form-control border border-dark rounded"
                 placeholder=" enter your TSC NO"
+                required
                 value={formData.TSCNO}
                 onChange={handleChange}
               />
@@ -56,32 +59,21 @@ const Teachersignin = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control border border-dark rounded"
-                placeholder=" Confirm Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
+            
+<div>
 
+            <Link to={"/teacher/teachermainpage"} ><button type="submit" className="btn btn-primary">
+                                Sign in
+                            </button> </Link>
 
-
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Sign in
-              </button>
-            </div>
+                            </div>
           </form>
           <p>
-            <a href="/Signup">If not signed in,please Signup</a>
+            <a href="/teacher/teacherregister">If not registered,please Signup</a>
           </p>
         </div>
       </div>
-    </div>
+   
 
 
 

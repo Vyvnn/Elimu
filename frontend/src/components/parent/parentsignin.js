@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
-
-const Parentsignin = () => {
+const ParentSignin = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        username: '',
+        parentsname: '',
         password: ''
     });
+
+
+   // eslint-disable-next-line
+const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
+  
+    const users = [{ parentsname: "Jane", password: "testpassword" }];
+    const account = users.find((user) => user.parentsname === formData.parentsname);
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -18,11 +29,25 @@ const Parentsignin = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Perform login logic here
-        // You can access form data from the 'formData' state
+      
+        if (account && account.password === formData.password) {
+          setauthenticated(true);
+          localStorage.setItem("authenticated", true);
+          navigate("/parentmainpage");
+        }
         console.log(formData);
 
-    }
+        if (!authenticated) {
+            return <Navigate replace to="/login" />;
+          } else {
+            return (
+              <div>
+                <p>Welcome to your Dashboard</p>
+              </div>
+            );
+          }
+      };
+      
     return (
 
         <div className="container">
@@ -34,18 +59,19 @@ const Parentsignin = () => {
                 <div className="col-md-6">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label>username</label>
+                            <label>Parent's Name:</label>
                             <input
                                 type="text"
-                                name="username"
+                                name="parentsname"
                                 className="form-control border border-dark rounded"
                                 placeholder=" enter username"
-                                value={formData.username}
+                                required
+                                value={formData.parentsname}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>Password: </label>
                             <input
                                 type="password"
                                 name="password"
@@ -55,28 +81,17 @@ const Parentsignin = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                className="form-control border border-dark rounded"
-                                placeholder=" Confirm Password"
-                                value={formData.password}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-
+                        
 
                         <div>
-                            <button type="submit" className="btn btn-primary">
+                        <Link to={"/parent/parentMainPage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
-                            </button>
+                            </button> </Link>
                         </div>
                     </form>
+
                     <p>
-                        <a href="/Signup">If not signed in,please Signup</a>
+                        <a href="/parent/parentRegister">If not registered,please Signup</a>
                     </p>
                 </div>
             </div>
@@ -85,4 +100,4 @@ const Parentsignin = () => {
 };
 
 
-export default Parentsignin;
+export default ParentSignin;
