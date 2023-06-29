@@ -12,7 +12,7 @@ import ParentRegister from './components/parent/parentregister'
 import Studentregister from './components/student/studentregister';
 import Teacherregister from './components/teacher/teacherregister';
 import Studentmainpage from './components/student/studentmainpage';
-import ParentMainPage from './components/parent/parentmainpage';
+// import ParentMainPage from './components/parent/parentmainpage';
 import TeacherMainPage from './components/teacher/teacherMainPage';
 import SubjectSelectPage from './components/student/subjectsSelectPage';
 import ContactUs from './components/contact_Us';
@@ -43,7 +43,7 @@ function App() {
         <Route path="/parent/parentRegister" element={<ParentRegister/>}/>
         <Route path="/student/studentregister" element={<Studentregister/>}/>
         <Route path="/teacher/teacherregister" element={<Teacherregister/>}/>
-        <Route path="/parent/parentmainpage" element={<ParentMainPage/>}/>
+        {/* <Route path="/parent/parentmainpage" element={<ParentMainPage/>}/> */}
        
         <Route path="/student/studentmainpage" element={<Studentmainpage/>}/>
         <Route path="/teacher/teacherMainpage" element={<TeacherMainPage/>}/>

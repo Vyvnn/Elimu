@@ -59,28 +59,17 @@ const Teachersignin = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control border border-dark rounded"
-                placeholder=" Confirm Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-
+            
 <div>
 
-            <Link to={"teacher/teachermainpage"} ><button type="submit" className="btn btn-primary">
+            <Link to={"/teacher/teachermainpage"} ><button type="submit" className="btn btn-primary">
                                 Sign in
                             </button> </Link>
 
                             </div>
           </form>
           <p>
-            <a href="teacher/teacherregister">If not registered,please Signup</a>
+            <a href="/teacher/teacherregister">If not registered,please Signup</a>
           </p>
         </div>
       </div>

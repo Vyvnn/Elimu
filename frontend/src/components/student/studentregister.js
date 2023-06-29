@@ -70,7 +70,6 @@ const StudentRegister = () => {
           <option value="Science">Science</option>
           <option value="Kiswahili">Kiswahili</option>
           <option value="C.R.E">C.R.E</option>
-          <option value="I.R.E">I.R.E</option>
           <option value="Biology">Biology</option>
           <option value="Physics">Physics</option>
           <option value="Chemistry">Chemistry</option>

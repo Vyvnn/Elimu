@@ -5,13 +5,13 @@ const Parentregister = () => {
   const [parentName, setParentName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedChild, setSelectedChild] = useState('');
+  const [selectedStudent, setSelectedStudent] = useState('');
   const [selectedGrade, setSelectedGrade] = useState('');
 
 
 
-  const handleChildChange = (e) => {
-    setSelectedChild(e.target.value);
+  const handleStudentChange = (e) => {
+    setSelectedStudent(e.target.value);
     setSelectedGrade(e.target.value);
   };
 
@@ -71,18 +71,18 @@ const Parentregister = () => {
 
           <br />
           <label>
-            Child Name:
-            <select value={selectedChild} onChange={handleChildChange}>
-              <option value="">Select Child</option>
-              <option value="Child A">Child A</option>
-              <option value="Child B">Child B</option>
-              <option value="Child C">Child C</option>
-              <option value="Child D">Child D</option>
-              <option value="Child E">Child E</option>
-              <option value="Child B">Child F</option>
-              <option value="Child C">Child G</option>
-              <option value="Child D">Child H</option>
-              <option value="Child E">Child I</option>
+            Student Name:
+            <select value={selectedStudent} onChange={handleStudentChange}>
+              <option value="">Select Student</option>
+              <option value="Child A">Student A</option>
+              <option value="Child B">Student B</option>
+              <option value="Child C">Student C</option>
+              <option value="Child D">Student D</option>
+              <option value="Child E">Student E</option>
+              <option value="Child B">Student F</option>
+              <option value="Child C">Student G</option>
+              <option value="Child D">Student H</option>
+              <option value="Child E">CStudent I</option>
               {/* Add more options for each child */}
             </select>
           </label>
@@ -92,14 +92,14 @@ const Parentregister = () => {
           <label>
             Grade:
 
-            <select value={selectedGrade} onChange={handleChildChange}>
+            <select value={selectedGrade} onChange={handleStudentChange}>
               <option value="">Select Class</option>
               <option value="Form 1">Form 1</option>
               <option value="Form 2">Form 2</option>
               <option value="Form 3">Form 3</option>
               <option value="Form 4">Form 4</option>
 
-              {/* Add more options for each child */}
+           
             </select>
           </label>
           </div>

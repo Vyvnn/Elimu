@@ -29,7 +29,7 @@ const teacherSchema = new mongoose.Schema({
 
 // Define the models
 const Parent = mongoose.model('Parent', parentSchema);
-const Child = mongoose.model('Child', childSchema);
+const Child = mongoose.model('Child', studentSchema);
 const Teacher = mongoose.model('Teacher', teacherSchema);
 
 module.exports = { Parent, Child, Teacher };

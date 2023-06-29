@@ -81,17 +81,7 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="form-group">
-                            <label> Confirm Password:</label>
-                            <input
-                                type="password"
-                                name="password"
-                                className="form-control border border-dark rounded"
-                                placeholder=" Confirm Password"
-                                value={formData.password}
-                                onChange={handleChange}
-                            />
-                        </div>
+                        
 
                         <div>
                         <Link to={"/parent/parentMainPage"} ><button type="submit" className="btn btn-primary">

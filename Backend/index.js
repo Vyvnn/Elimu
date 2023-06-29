@@ -19,25 +19,25 @@ app.listen(3003,()=>{
 
 
 
-// // const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 
 
-// // const connectDB = () => {
-// //     mongoose.connect('mongodb+srv://vivyan3:burpee6@elimu.lhrbpeb.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true });
+// const connectDB = () => {
+//  mongoose.connect('mongodb+srv://vivyan3:burpee6@elimu.lhrbpeb.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// //   mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-// // mongodb+srv://vivyan3:<password>@elimu.lhrbpeb.mongodb.net/<database-name>
+// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongodb+srv://vivyan3:<password>@elimu.lhrbpeb.mongodb.net/<database-name>
 
-//   // const productSchema = new mongoose.Schema({});
-//   // const product = mongoose.model("products", productSchema);
-// //   const db = mongoose.connection;
+// const productSchema = new mongoose.Schema({});
+// const product = mongoose.model("products", productSchema);
+// const db = mongoose.connection;
   
-// //   db.on('error', console.error.bind(console, 'connection error:'));
-// //   db.once('open', function () {
-// //     console.log('Connected');
-// //   });
-// // }
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function () {
+// console.log('Connected');
+// });
+// }
 
 // // console.log(process.env.MONGODB_URI);
 // // connectDB();

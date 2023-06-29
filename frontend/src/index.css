@@ -41,7 +41,7 @@
 #welcome{
   display: flex;
   flex-flow:column;
- 
+ margin: right;
   height: 45vh;
   background-color: transparent; 
   width: 30vh;
@@ -59,10 +59,7 @@
   border-style: none;
   
   }
-
-
-
-   #welcomesignin:hover{
+ #welcomesignin:hover{
     cursor: pointer;
     background-color:rgb(142, 157, 142);
   }
@@ -75,7 +72,6 @@ body{
   background-attachment: fixed;
   background-size: 100% 100%;
 }
-
 #profile{
   display: flex;
   width: 40%;
@@ -107,9 +103,9 @@ body{
   box-sizing: border-box;
    }
 
-   div {
-    border-radius: 5px;
-        padding: 20px;
+  div {
+  border-radius: 5px;
+  padding: 20px;
   }
   .container{
     display:flex;
@@ -128,21 +124,15 @@ body{
   justify-content: center;
   background-color: rgb(161, 154, 154);
   height: 7vh;
-     width: 20%;
-   
-
+   width: 20%;
 }
-
 #parentpage{
   display: flex;
 align-items: left;
 background-color:bisque;
-
 }
 #icon {width: 50%;
-
 }
-
 .contact_us {
   background-color: #a09696;
   border-radius: 20px;
@@ -177,4 +167,26 @@ background-color:bisque;
   color: #fff;
   font-weight: 700;
 }
+.subject{
+display: flex;
+width: 40%;
+height: 05vh;
+align-items: center;
+background-color: #a09696;
 
+}
+.subjectdisplay{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 0;
+  margin: auto;
+} 
+.subjectheading h2{
+  
+  align-items: center;
+  margin: auto;
+  background-color: #ece3e3;
+  width: 20%;
+  height: 05vh;
+
+}
