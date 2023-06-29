@@ -1,72 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Assuming you're using axios for API requests
+import React, { useState, useEffect } from 'react';
 
-function TeacherPage() {
-  const [teacherData, setTeacherData] = useState(null);
-  const [studentsData, setStudentsData] = useState([]);
+const TeacherPage = () => {
+  const [students, setStudents] = useState([]);
+  const [selectedStudentId, setSelectedStudentId] = useState('');
+  const [grade, setGrade] = useState('');
+  const [remark, setRemark] = useState('');
 
   useEffect(() => {
-    // Fetch teacher data from the API
-    axios.get('/api/teacher') // Replace '/api/teacher' with your actual API endpoint
-      .then(response => {
-        setTeacherData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching teacher data:', error);
-      });
-
-    // Fetch students data from the API
-    axios.get('/api/students') // Replace '/api/students' with your actual API endpoint
-      .then(response => {
-        setStudentsData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching students data:', error);
-      });
+    fetchAllStudents();
   }, []);
 
-  const handleChange = (e, studentId) => {
-    const updatedStudents = studentsData.map(student => {
-      if (student.id === studentId) {
-        return {
-          ...student,
-          grade: e.target.value
-        };
-      }
-      return student;
-    });
-    setStudentsData(updatedStudents);
+  const fetchAllStudents = () => {
+    fetch('/api/students')
+      .then(response => response.json())
+      .then(data => {
+        setStudents(data);
+      })
+      .catch(error => {
+        console.error('Error fetching students:', error);
+      });
+  };
+
+  const handleStudentSelect = (e) => {
+    setSelectedStudentId(e.target.value);
+  };
+
+  const handleGradeChange = (e) => {
+    setGrade(e.target.value);
+  };
+
+  const handleRemarkChange = (e) => {
+    setRemark(e.target.value);
+  };
+
+  const handleUpdateGradeAndRemark = (e) => {
+    e.preventDefault();
+    if (!selectedStudentId || !grade || !remark) {
+      return;
+    }
+
+    fetch(`/api/students/${selectedStudentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ grade, remark })
+    })
+      .then(() => {
+        // Success message or other UI update
+        fetchAllStudents();
+        setSelectedStudentId('');
+        setGrade('');
+        setRemark('');
+      })
+      .catch(error => {
+        console.error('Error updating grade and remark:', error);
+      });
   };
 
   return (
-    <div className='form-group'>
-      <h1>Welcome, {teacherData && teacherData.name}</h1>
-
-      <h2>Subjects: {teacherData && teacherData.subjects}</h2>
-      <h2>Class/Form: {teacherData && teacherData.classForm}</h2>
-
-      <h3>Students:</h3>
-      {studentsData.length > 0 ? (
+    <div>
+      <h3>Teacher Page</h3>
+      <form onSubmit={handleUpdateGradeAndRemark}>
+        <label>
+          Select Student:
+          <select value={selectedStudentId} onChange={handleStudentSelect}>
+            <option value="">-- Select Student --</option>
+            {students.map((student) => (
+              <option key={student._id} value={student._id}>
+                {student.name}
+              </option>
+            ))}
+          </select>
+        </label>
         <div>
-          {studentsData.map(student => (
-            <div key={student.id}>
-              <h4>Student Name: {student.name}</h4>
-              <p>Grade: 
-                <input
-                  type="text"
-                  value={student.grade}
-                  onChange={e => handleChange(e, student.id)}
-                />
-              </p>
-              <p>Remark: {student.remark}</p>
-            </div>
-          ))}
+          <label>
+            Grade:
+            <input type="text" value={grade} onChange={handleGradeChange} />
+          </label>
         </div>
-      ) : (
-        <p>No students found.</p>
-      )}
+        <div>
+          <label>
+            Remark:
+            <input type="text" value={remark} onChange={handleRemarkChange} />
+          </label>
+        </div>
+        <button type="submit">Update Grade and Remark</button>
+      </form>
     </div>
   );
-}
+};
 
 export default TeacherPage;
