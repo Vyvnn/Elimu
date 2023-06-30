@@ -1,30 +1,67 @@
 import React, { useState } from 'react';
 
+const StudentMainPage = () => {
+  const [studentName, setStudentName] = useState('');
+  const [subject, setSubject] = useState('');
+  const [grade, setGrade] = useState('');
+  const [remark, setRemark] = useState('');
+  const [error, setError] = useState('');
 
-const Studentmainpage = ({ onSave }) => {
-  const [performance, setPerformance] = useState('');
-  const [remarks, setRemarks] = useState('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSave = () => {
-    onSave({ performance, remarks });
-    setPerformance('');
-    setRemarks('');
+    try {
+      const response = await fetch('/api/grade-and-remark', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ studentName, subject }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error retrieving student');
+      }
+
+      const data = await response.json();
+      setGrade(data.grade);
+      setRemark(data.remark);
+      setError('');
+    } catch (error) {
+      setError('Error retrieving student');
+      setGrade('');
+      setRemark('');
+    }
   };
 
   return (
-    <div>
-      <h3>Student Performance</h3>
-      <label>
-        Performance:
-        <input type="text" value={performance} onChange={(e) => setPerformance(e.target.value)} />
-      </label>
-      <label>
-        Remarks:
-        <textarea value={remarks} onChange={(e) => setRemarks(e.target.value)} />
-      </label>
-      <button onClick={handleSave}>Save</button>
+    <div className='container' >
+      <h1>Student Main Page</h1>
+
+      <form className='container'  onSubmit={handleSubmit}>
+        <label>
+          Student Name:
+          <input type="text" value={studentName} onChange={(e) => setStudentName(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Subject:
+          <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} />
+        </label>
+        <br />
+        <button type="submit">Get Grade and Remark</button>
+      </form>
+
+      {grade && remark && (
+        <div>
+          <h2>Grade: {grade}</h2>
+          <p>Remark: {remark}</p>
+        </div>
+      )}
+
+      {error && <p>{error}</p>}
     </div>
   );
 };
 
-export default Studentmainpage;
+export default StudentMainPage;

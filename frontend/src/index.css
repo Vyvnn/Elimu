@@ -190,3 +190,25 @@ background-color: #a09696;
   height: 05vh;
 
 }
+.teacherform {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.studentform{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 8px;
+  box-sizing: border-box;
+  background-color: #f1356d;
+  height: 70vh;
+}
+
+.parentform{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: aqua;
+}
