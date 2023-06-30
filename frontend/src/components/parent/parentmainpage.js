@@ -20,10 +20,10 @@ const ParentMainPage = ({ getStudentDetails }) => {
   };
 
   return (
-    <div>
+    <div className='container'>
       <h1>Parent Page</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form  className='container'     onSubmit={handleSubmit}>
         <label>
           Parent Name:
           <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />

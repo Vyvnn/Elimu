@@ -35,10 +35,10 @@ const StudentMainPage = () => {
   };
 
   return (
-    <div>
+    <div className='container' >
       <h1>Student Main Page</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form className='container'  onSubmit={handleSubmit}>
         <label>
           Student Name:
           <input type="text" value={studentName} onChange={(e) => setStudentName(e.target.value)} />

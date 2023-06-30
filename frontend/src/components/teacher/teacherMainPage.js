@@ -60,8 +60,9 @@ const TeacherPage = () => {
 
   return (
     <div>
+    <div className='container'>
       <h3>Teacher Page</h3>
-      <form onSubmit={handleUpdateGradeAndRemark}>
+      <form  className='container'   onSubmit={handleUpdateGradeAndRemark}>
         <label>
           Select Student:
           <select value={selectedStudentId} onChange={handleStudentSelect}>
@@ -87,6 +88,7 @@ const TeacherPage = () => {
         </div>
         <button type="submit">Update Grade and Remark</button>
       </form>
+      </div>
     </div>
   );
 };
