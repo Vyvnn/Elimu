@@ -4,7 +4,6 @@ const StudentMainPage = () => {
   const [studentName, setStudentName] = useState('');
   const [studentId, setStudentId] = useState('');
 
-  const [subject, setSubject] = useState('');
   const [grade, setGrade] = useState('');
   const [remark, setRemark] = useState('');
   const [error, setError] = useState('');
