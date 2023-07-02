@@ -270,3 +270,12 @@ background-color: #a09696;
   left: 10%;
   transform: translate(-10%, -10%);
   text-align: center;}
+  .homepic{
+    display: flex;
+  align-items:bottom;
+  
+  }.bottom-right-image{
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+  }
