@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const StudentMainPage = () => {
   const [studentName, setStudentName] = useState('');
   const [studentId, setStudentId] = useState('');
-  const [subject, setSubject] = useState('');
+  
+
   const [grade, setGrade] = useState('');
   const [remark, setRemark] = useState('');
   const [error, setError] = useState('');
@@ -26,11 +27,12 @@ const StudentMainPage = () => {
 
       const data = await response.json();
       setGrade(data.grade);
-      setStudentId(data.studentId);
+      setRemark(data.remark);
       setError('');
     } catch (error) {
       setError('Error retrieving student');
       setGrade('');
+      setStudentId('');
       setRemark('');
       setStudentId('');
     }
@@ -47,8 +49,8 @@ const StudentMainPage = () => {
         </label>
         <br />
         <label>
-          Student Id:
-          <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
+          Subject:
+          <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} />
         </label>
         <br />
         <button type="submit">Get Grade and Remark</button>
