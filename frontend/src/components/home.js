@@ -12,6 +12,7 @@ const Home = () => {
         <h3>Elimu</h3>
 
         <Link to={"/profile"} id="welcomesignin" ><button id="welcomesignin" >SIGN IN
+        <div className='homepic'><img src="./images/elimucover.jpg" alt="Parent" className="bottom-right-image"/></div>
 
         </button></Link>
 
