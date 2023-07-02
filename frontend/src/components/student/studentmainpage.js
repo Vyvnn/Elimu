@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const StudentMainPage = () => {
   const [studentName, setStudentName] = useState('');
+  const [studentId, setStudentId] = useState('');
+
   const [subject, setSubject] = useState('');
   const [grade, setGrade] = useState('');
   const [remark, setRemark] = useState('');
@@ -16,7 +18,7 @@ const StudentMainPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ studentName, subject }),
+        body: JSON.stringify({ studentName, studentId }),
       });
 
       if (!response.ok) {
@@ -25,11 +27,13 @@ const StudentMainPage = () => {
 
       const data = await response.json();
       setGrade(data.grade);
+      setStudentId(data.studentId)
       setRemark(data.remark);
       setError('');
     } catch (error) {
       setError('Error retrieving student');
       setGrade('');
+      setStudentId('');
       setRemark('');
     }
   };
@@ -45,8 +49,8 @@ const StudentMainPage = () => {
         </label>
         <br />
         <label>
-          Subject:
-          <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} />
+          StudentID:
+          <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
         </label>
         <br />
         <button type="submit">Get Grade and Remark</button>

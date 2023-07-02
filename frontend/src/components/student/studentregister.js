@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 const StudentRegister = () => {
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+  const [studentID, setStudentID] = useState("");
+  const [password, setPassword] = useState('');
   const [studentClass, setStudentClass] = useState("");
   const [subject, setSubject] = useState("");
   const [interest, setInterest] = useState("");
@@ -14,8 +15,8 @@ const StudentRegister = () => {
       case "full-name":
         setFullName(value);
         break;
-      case "email":
-        setEmail(value);
+      case "studentID":
+        setStudentID(value);
         break;
       case "studentClass":
         setStudentClass(value);
@@ -42,8 +43,8 @@ const StudentRegister = () => {
         <input type="text" placeholder="Enter Full Name" name="full-name" id="full-name" value={fullName} onChange={handleChange} required />
   
         <div>
-          <label htmlFor="email">Email</label>
-          <input type="text" placeholder="Enter Email" name="email" id="email" maxLength="8" value={email} onChange={handleChange} required />
+          <label htmlFor="studentID">StudentID</label>
+          <input type="text" placeholder="Enter StudentID" name="studentID" id="studentID" maxLength="8" value={studentID} onChange={handleChange} required />
         </div>
   
         <label htmlFor="studentClass"> Select Class</label>
@@ -81,6 +82,19 @@ const StudentRegister = () => {
           <option value="Robotics">Robotics</option>
         </select>
       </div>
+      <div>
+            <label>
+              Password:
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </label>
+          </div>
+
+          <br />
+          <label>
+            Confirm Password:
+            <input type=" confirm password " value={password} onChange={(e) => setPassword(e.target.value)} />
+
+          </label>
       <div>
     <Link to={"student/studentmainpage"} ><button type="submit" className="btn btn-primary">
 Register

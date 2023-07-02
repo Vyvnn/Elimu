@@ -1,7 +1,6 @@
-
-
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -26,18 +25,22 @@ const Profile = () => {
         <strong><p id='choose'>Are you a:</p></strong>
       </div>
       <br />
-      <button id="profile" onClick={() => handleProfileSelection('student')}>
+      <Link to='/student/studentsignin'> <img src="./images/studentpic.png" alt="Student" className="Student"/></Link>
+      {/* <button id="profile" onClick={() => handleProfileSelection('student')}>
   <h3>STUDENT</h3>
-</button>
+</button> */}
        
       <br />
-      <button  id="profile"onClick={() => handleProfileSelection('parent')}>
+      <Link to='/parent/parentsignin'> <img src="./images/parent_guide.png" alt="Parent" className="Parent"/></Link>
+      {/* <button  id="profile"onClick={() => handleProfileSelection('parent')}>
         <h3>PARENT/GUARDIAN</h3>
-      </button>
+      </button> */}
+      
       <br />
-      <button  id="profile"onClick={() => handleProfileSelection('teacher')}>
+      <Link to='/teacher/teachersignin'> <img src="./images/teacherpic.png" alt="Teacher" className="Teacher"/></Link>
+      {/* <button  id="profile"onClick={() => handleProfileSelection('teacher')}>
         <h3>TEACHER</h3>
-      </button>
+      </button> */}
     </div>
   );
 };
