@@ -8,9 +8,8 @@ const TeacherRegister = () => {
     const [specialitySubjects, setSpecialitySubjects] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
-    const [schoolNumber, setSchoolNumber] = useState("");
-    const [teachingAvailability, setTeachingAvailability] = useState("");
-
+    
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         // Perform form submission logic here
