@@ -1,35 +1,41 @@
-// models.js
-
 const mongoose = require('mongoose');
+const crypto=require("crypto");
 
 // Parent schema
 const parentSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  children: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Child' }]
-});
+  name:{type: String, required:true, minlength:3,maxlength:30 },
+  email: {type: String,required:true,minlength:3, maxlength:200,unique:true},
+  password:{type: String,required:true,minlength:3,maxlength:1024},
 
-// Child schema
-const childSchema = new mongoose.Schema({
-  name: String,
-  dateOfBirth: Date,
-  grade: String,
-  parents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Parent' }]
-});
+  encry_password:{
+type:String,
+required:true
+  },
+  salt:String,
+  
+  student: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
+},{timestamps:true});
+parentSchema.virtual("password")
+.set({
 
-// Teacher schema
-const teacherSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  subjectsTaught: [String],
-  teachersremark:[String]
-});
+})
+.get({
 
-// Define the models
+})
+parentSchema.methods={
+  authenticate:function(plainpassword){
+    return this.securePassword(plainpassword)===this.encry_password
+  },
+  securePassword: function(plainpassword){
+    if(!plainpassword) return"";
+    try{
+      return crypto.createHmac("sha256",this.salt).update(plainpassword).digest('hex')
+    }
+   catch (err){
+    return ""
+  }
+},
+}
 const Parent = mongoose.model('Parent', parentSchema);
-const Child = mongoose.model('Child', studentSchema);
-const Teacher = mongoose.model('Teacher', teacherSchema);
 
-module.exports = { Parent, Child, Teacher };
+module.exports = Parent;
