@@ -8,10 +8,9 @@ require("dotenv").config();
 
 
 //DB Connection
-mongoose.connect(process.env.DB_URI,{
+mongoose.connect('mongodb+srv://vivyan3:burpee6@e-limu.pdudq6m.mongodb.net/',{
 useNewUrlParser:true,
 useUnifiedTopology:true,
-useCreateIndex:true
 
 }).then(()=>{
     console.log("DB CONNECTED")
@@ -25,6 +24,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors)
 
+
+const port=process.env.PORT|| 5000;
+
+
 //routes
 app.get('/',(req,res)=>{
 res.send('hello')
@@ -36,10 +39,10 @@ res.send('hello')
 
 
 
-
+//start a server
 app.listen(5000,()=>{
 
-    console.log('listening to port 5000')
+    console.log('listening at ${port}')
 })
 
 
