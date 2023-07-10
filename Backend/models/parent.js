@@ -5,7 +5,7 @@ const crypto=require("crypto");
 const parentSchema = new mongoose.Schema({
   name:{type: String, required:true, minlength:3,maxlength:30 },
   email: {type: String,required:true,minlength:3, maxlength:200,unique:true},
-  password:{type: String,required:true,minlength:3,maxlength:1024},
+  
 
   encry_password:{
 type:String,
@@ -16,10 +16,15 @@ required:true
   student: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
 },{timestamps:true});
 parentSchema.virtual("password")
-.set({
+.set(function(password){
+_password=password
+salt= Math.random().toString(26).slice(2)
+this.encry_password = this.securePassword(password)
+
 
 })
-.get({
+.get(function(){
+  return this._password
 
 })
 parentSchema.methods={

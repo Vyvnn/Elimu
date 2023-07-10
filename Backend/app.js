@@ -24,6 +24,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors)
 
+//import the routes
+const mainpageRoutes= require("./routes/mainpage")
+
+//using routes
+app.use('/api', mainpageRoutes)
+
 
 const port=process.env.PORT|| 5000;
 
