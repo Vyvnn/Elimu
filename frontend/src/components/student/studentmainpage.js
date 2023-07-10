@@ -49,8 +49,8 @@ const StudentMainPage = () => {
         </label>
         <br />
         <label>
-          Subject:
-          <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} />
+          studentId:
+          <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
         </label>
         <br />
         <button type="submit">Get Grade and Remark</button>
