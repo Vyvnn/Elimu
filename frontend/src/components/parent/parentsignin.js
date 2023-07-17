@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 const ParentSignin = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        parentsname: '',
+        name: '',
+        email:'',
         password: ''
     });
 
@@ -15,8 +16,8 @@ const ParentSignin = () => {
    // eslint-disable-next-line
 const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
   
-    const users = [{ parentsname: "Jane", password: "testpassword" }];
-    const account = users.find((user) => user.parentsname === formData.parentsname);
+    const users = [{ name: "Jane", password: "testpassword" }];
+    const account = users.find((user) => user.name === formData.name);
 
 
     const handleChange = (event) => {
@@ -62,9 +63,21 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
                             <label>Parent's Name:</label>
                             <input
                                 type="text"
-                                name="parentsname"
+                                name="name"
                                 className="form-control border border-dark rounded"
                                 placeholder=" enter username"
+                                required
+                                value={formData.parentsname}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Email:</label>
+                            <input
+                                type="text"
+                                name="email"
+                                className="form-control border border-dark rounded"
+                                placeholder=" enter email"
                                 required
                                 value={formData.parentsname}
                                 onChange={handleChange}

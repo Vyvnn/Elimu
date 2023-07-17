@@ -3,7 +3,7 @@ const Student = require('../models/student');
 
 const parentController = {
   parentSignIn: async (req, res) => {
-    const { parentName, phoneNumber, email, studentId } = req.body;
+    const { name, phoneNumber, email, studentId } = req.body;
 
     try {
       // Find the associated student by ID
@@ -15,7 +15,7 @@ const parentController = {
 
       // Create a new parent document
       const newParent = new Parent({
-        parentName,
+        parentName: name,
         phoneNumber,
         email,
         student: student._id // Associate the parent with the student using their ID
@@ -32,11 +32,11 @@ const parentController = {
   },
 
   getParentDetails: async (req, res) => {
-    const { parentName, studentId } = req.body;
+    const { name, studentId } = req.body;
 
     try {
       // Find the parent associated with the specified student ID
-      const parent = await Parent.findOne({ parentName, student: studentId });
+      const parent = await Parent.findOne({ parentName: name, student: studentId });
 
       if (!parent) {
         return res.status(404).send('Parent not found');
@@ -51,5 +51,3 @@ const parentController = {
     }
   }
 };
-
-module.exports = parentController;

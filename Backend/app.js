@@ -1,5 +1,6 @@
 const express = require('express');
 const app= express();
+const mainpageRoutes = require('./routes/mainpage');
 const mongoose = require ('mongoose');
 const bodyParser=require('body-parser');
 const cookieParser=require('cookie-parser');
@@ -19,16 +20,20 @@ useUnifiedTopology:true,
 })
 
 
+
+
+
+
+
 //use parsing middleware
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors)
 
-//import the routes
-const mainpageRoutes= require("./routes/mainpage")
+
 
 //using routes
-app.use('/api', mainpageRoutes)
+app.use('/api/mainpage', mainpageRoutes);
 
 
 const port=process.env.PORT|| 5000;

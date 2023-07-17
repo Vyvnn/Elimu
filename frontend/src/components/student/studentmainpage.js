@@ -49,7 +49,7 @@ const StudentMainPage = () => {
         </label>
         <br />
         <label>
-          studentId:
+
           <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
         </label>
         <br />

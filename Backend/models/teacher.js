@@ -12,7 +12,7 @@ const teacherSchema = new mongoose.Schema({
     required:true
       },
       salt:String,
-      
+       
       
     },{timestamps:true});
     teacherSchema.virtual("password")
