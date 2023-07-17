@@ -21,7 +21,12 @@ const Home = () => {
 
       </div>
 
+<div>
+<p>Elimu is a classroom management tool that enables schools to bring parents, teachers and students into classroom communities so they can track and enhance classroom behavior in real-time.</p>
 
+<p>Elimu that helps build amazing classroom and school communities. Teachers give feedback to students for any skill, like “Working hard” and “Being curious.”  Parents view their child’s feedback, message directly with teachers . </p>
+
+</div>
 
 
     </div>
