@@ -5,6 +5,7 @@ const Parentregister = () => {
   const [parentName, setParentName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmPassword] = useState('');
   const [selectedStudent, setSelectedStudent] = useState('');
   const [selectedGrade, setSelectedGrade] = useState('');
 
@@ -25,6 +26,7 @@ const Parentregister = () => {
     //   parentName,
     //   email,
     //   password,
+
     //   childName,
     //   grade,
     // };
@@ -64,7 +66,7 @@ const Parentregister = () => {
           <br />
           <label>
             Confirm Password:
-            <input type=" confirm password " value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="  password " value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
           </label>
 
@@ -109,7 +111,7 @@ const Parentregister = () => {
 
           {/* Other form inputs for password, child's name, grade, etc. */}
           <div>
-            <Link to={"parent/parentMainPage"} ><button type="submit" className="btn btn-primary">
+            <Link to={"parent/parentmainpage"} ><button type="submit" className="btn btn-primary">
               Register
             </button> </Link>
           </div>
