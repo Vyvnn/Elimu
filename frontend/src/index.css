@@ -31,6 +31,7 @@
   background-image: url(/public/images/homepic3.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-attachment: s;
   background-position: right top;
  margin-top: 0.2%;
   height: 80vh;
@@ -204,4 +205,94 @@ div {
   margin: 8px 0;
   box-sizing: border-box;
   background-color: aqua;
+}
+.work-section {
+  padding-top: 90px!important;
+  padding-bottom: 90px!important;
+  min-height: 850px;
+  background-color: transparent;
+}
+
+.work-section .container { max-width: 1242px; }
+
+.tm-work-item-inner {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  .work-section .item {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+
+.work-section .item.one { margin-top: 80px; }
+
+@media (max-width: 767px) {
+  .work-section .item.one { margin-top: 0;}
+}
+
+.work-section .item.two { margin-top: 161px; }
+
+@media (max-width: 767px) {
+  .work-section .item.two { margin-top: 0; }
+}
+
+.work-section .item .icn {
+  width: 119px;
+  height: 119px;
+  display: block;
+  border: 1px solid #fff;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  .work-section .item .icn { margin: 0 auto 20px; }
+}
+
+.work-section .item h3 {
+  color: #0a080a;
+  text-transform: uppercase;
+  font-size: 27px;
+  letter-spacing: -1px;
+  margin-bottom: 9px;
+}
+
+.work-section .item p {
+  color: #fff;
+  line-height: 31px;
+  margin-bottom: 0;
+}
+
+.work-section .title {
+  margin-top: 5px;
+  margin-left: 1px;
+  border-bottom: 1px solid #fff;
+}
+
+.work-section .title h2 {
+  color: #fff;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.containerposition{
+  display: flex;
+  justify-content: horizontal;
+  align-items: horizontal, 
 }

@@ -2,7 +2,7 @@
 import './App.css';
 import Nav from './components/Nav'
 import {BrowserRouter,Routes ,Route} from 'react-router-dom'
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Home from './components/home';
 import Profile from './components/profile';
 import Studentsignin from './components/student/studentsignin';
@@ -68,7 +68,7 @@ function App() {
       </BrowserRouter>
       
       
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

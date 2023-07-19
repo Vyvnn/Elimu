@@ -29,9 +29,60 @@ const Home = () => {
       </div> */}
 
 
-    </div>
 
+      <section className="work-section section" id="section-2">
+        <div className="container">
+          <div className="row">
+            <div className="item col-md-4">
+              <div className="tm-work-item-inner">
+                
+                <h3>Student</h3>
+                <p>The student is able to view his grades and teachers remark.</p>
+              </div>
+            </div>
+<div className='containerposition'>
+            <div className="container">
+            <div className="row">
+            <div className="item col-md-4">
+              <div className="tm-work-item-inner">
+                
+                <h3>Parent</h3>
+                <p>The parent is able to view specific student performance as well as the teachers remarks.</p>
+              </div>
+              </div>
+              </div>
+            </div>
+            </div>
+
+
+            <div className="container">
+            <div className="row">
+            <div className="item col-md-4">
+              <div className="tm-work-item-inner">
+                
+                <h3>Teacher</h3>
+                <p>The teacher is able to give student grade and remarks per subject taken.</p>
+              </div>
+            </div>
+            </div>
+            </div>
+          </div>
+          <div className="title">
+            <h2>Our Work</h2>
+            </div>
+        </div>
+      </section>
+    </div>
   );
-}
+};
+
+
+
+
+
+
+
+
+
 
 export default Home;
