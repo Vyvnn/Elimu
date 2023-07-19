@@ -31,8 +31,10 @@
   background-image: url(/public/images/homepic3.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
-  height: 500px;
+  background-position: right top;
+ margin-top: 0.2%;
+  height: 80vh;
+  width: 50%;
 }
 
 #welcome {
