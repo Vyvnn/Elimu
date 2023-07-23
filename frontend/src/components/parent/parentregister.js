@@ -9,7 +9,7 @@ const Parentregister = () => {
   const [selectedStudent, setSelectedStudent] = useState('');
   const [selectedGrade, setSelectedGrade] = useState('');
   const [formErrors, setFormErrors] = useState({});
-       
+
 
   const handleStudentChange = (e) => {
     const { name, value } = e.target;
@@ -79,106 +79,101 @@ const Parentregister = () => {
       })
       .then((data) => {
         console.log('Registration successful:', data);
-        
+
       })
       .catch((error) => {
-   
+
         console.error('Registration failed:', error.message);
-     
-        
+
+
       });
   };
 
   return (
 
-    <div className="form-group">
-      <form className='container' onSubmit={handleSubmit}>
 
-        <div className="row justify-content-center">
-          <div>
-            <label>
-              Parent's Name:
-              <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
-            </label>
-            {formErrors.parentName && <p className="error">{formErrors.parentName}</p>}
-          </div>
-          <div>
-            <label>
-              Email:
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </label>
-            {formErrors.email && <p className="error">{formErrors.email}</p>}
-          </div>
-
-          <div>
-            <label>
-              Password:
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </label>
-            {formErrors.password && <p className="error">{formErrors.password}</p>}
-          </div>
-
-          <br />
+    <form className='container' onSubmit={handleSubmit}>
+      <div className="form-group"></div>
+      <div className="row justify-content-center">
+        <div>
           <label>
-            Confirm Password:
-            <input type="password" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            Parent's Name:
+            <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
           </label>
-          {formErrors.confirmpassword && <p className="error">{formErrors.confirmpassword}</p>}
-
-          <br />
-          <label>
-            Student Name:
-            <label>
-              Student Name:
-              <select name="selectedStudent" value={selectedStudent} onChange={handleStudentChange}>
-              <option value="">Select Student</option>
-              <option value="Child A">Student A</option>
-              <option value="Child B">Student B</option>
-              <option value="Child C">Student A</option>
-              <option value="Child D">Student B</option>
-
-
-
-
-              {/* Add more options for each child */}
-            </select>
-              
-            </label>
-
-          </label>
-          {formErrors.selectedStudent && <p className="error">{formErrors.selectedStudent}</p>}
-
-          <div>
-            <label>
-              Grade:
-              <select name="selectedGrade" value={selectedGrade} onChange={handleStudentChange}>
-              <option value="">Select Class</option>
-                <option value="Form 1">Form 1</option>
-                <option value="Form 2">Form 2</option>
-                <option value="Form 3">Form 3</option>
-                <option value="Form 4">Form 4</option>
-              </select>
-            </label>
-
-            {formErrors.selectedGrade && <p className="error">{formErrors.selectedGrade}</p>}
-          </div>
-
-
-
+          {formErrors.parentName && <p className="error">{formErrors.parentName}</p>}
         </div>
         <div>
+          <label>
+            Email:
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </label>
+          {formErrors.email && <p className="error">{formErrors.email}</p>}
+        </div>
+
+        <div>
+          <label>
+            Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </label>
+          {formErrors.password && <p className="error">{formErrors.password}</p>}
+        </div>
+
+        <br />
+        <label>
+          Confirm Password:
+          <input type="password" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        </label>
+        {formErrors.confirmpassword && <p className="error">{formErrors.confirmpassword}</p>}
+
+        <br />
+
+
+        <label>
+          Student Name:
+          <select name="selectedStudent" value={selectedStudent} onChange={handleStudentChange}>
+            <option value="">Select Student</option>
+            <option value="Child A">Student A</option>
+            <option value="Child B">Student B</option>
+            <option value="Child C">Student A</option>
+            <option value="Child D">Student B</option>
+
+
+
+
+            {/* Add more options for each child */}
+          </select>
+
+
+
+        </label>
+        {formErrors.selectedStudent && <p className="error">{formErrors.selectedStudent}</p>}
+
+        <div>
+          <label>
+            Grade:
+            <select name="selectedGrade" value={selectedGrade} onChange={handleStudentChange}>
+              <option value="">Select Class</option>
+              <option value="Form 1">Form 1</option>
+              <option value="Form 2">Form 2</option>
+              <option value="Form 3">Form 3</option>
+              <option value="Form 4">Form 4</option>
+            </select>
+          </label>
+
+          {formErrors.selectedGrade && <p className="error">{formErrors.selectedGrade}</p>}
+        </div>
+
+
+
+      </div>
+      <div>
         <Link to={"/parent/parentsignin"} ><button type="submit" className="btn btn-primary" onClick={handleSubmit}>
           Register
         </button> </Link>
       </div>
-      </form>
-
-    
-    </div>
+    </form>
   );
-
-
-};
+}
 
 
 export default Parentregister;

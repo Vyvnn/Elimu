@@ -8,6 +8,8 @@ const StudentRegister = () => {
   const [studentClass, setStudentClass] = useState("");
   const [subject, setSubject] = useState("");
   const [interest, setInterest] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState('');
+  const [formErrors, setFormErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,9 +37,62 @@ const StudentRegister = () => {
   const handleClassChange = (e) => {
     setStudentClass(e.target.value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const errors = {};
+    if (!fullName) {
+      errors.fullName = "Full Name is required";
+    }
+    if (!studentID) {
+      errors.studentID = "Student ID is required";
+    }
+ 
+  
+    // If there are errors, set the formErrors state and prevent form submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    // Create an object with the form data
+    const formData = {
+      fullName,
+      studentID,
+      password,
+      studentClass,
+      subject,
+      interest,
+    };
+
+    fetch('/(http://localhost:5000/api/mainpage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+ 
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+
+  .then((data) => {
+    console.log('Registration successful:', data);
+
+  })
+  .catch((error) => {
+
+    console.error('Registration failed:', error.message);
+
+
+  });
+};
 
   return (
-    <form className="container">
+    <form className="container" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="full-name">Full Name</label>
         <input type="text" placeholder="Enter Full Name" name="full-name" id="full-name" value={fullName} onChange={handleChange} required />
@@ -91,12 +146,19 @@ const StudentRegister = () => {
 
           <br />
           <label>
-            Confirm Password:
-            <input type=" confirm password " value={password} onChange={(e) => setPassword(e.target.value)} />
+          
+            <label>
+          Confirm Password:
+          <input type="password" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        </label>
+        {formErrors.confirmpassword && <p className="error">{formErrors.confirmpassword}</p>}
+
+        <br />
+
 
           </label>
       <div>
-    <Link to={"student/studentmainpage"} ><button type="submit" className="btn btn-primary">
+    <Link to={"student/studentsignin"} ><button type="submit" className="btn btn-primary">
 Register
     </button> </Link>
     </div>
