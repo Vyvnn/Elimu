@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
-  studentID: {
-    type: Number,
-    required: true
-  },
+  // studentID: {
+  //   type: Number,
+  //   required: true
+  // },
  
  
   subject: {
@@ -23,10 +23,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     default: '' // Set the default value to an empty string
   },
-  encry_password:{
-    type:String,
-    required:true
-      },
+  // encry_password:{
+  //   type:String,
+  //   required:true
+  //     },
       salt:String,
       
       

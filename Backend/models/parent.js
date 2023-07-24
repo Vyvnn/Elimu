@@ -20,7 +20,7 @@ const parentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  salt: String,
+  
   student_Id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
 }, { timestamps: true });
 
