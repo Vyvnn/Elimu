@@ -8,118 +8,176 @@ const Parentregister = () => {
   const [confirmpassword, setConfirmPassword] = useState('');
   const [selectedStudent, setSelectedStudent] = useState('');
   const [selectedGrade, setSelectedGrade] = useState('');
-
+  const [formErrors, setFormErrors] = useState({});
 
 
   const handleStudentChange = (e) => {
-    setSelectedStudent(e.target.value);
-    setSelectedGrade(e.target.value);
+    const { name, value } = e.target;
+    if (name === "selectedStudent") {
+      setSelectedStudent(value);
+    } else if (name === "selectedGrade") {
+      setSelectedGrade(value);
+    }
   };
-
-
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Create an object with the form data
-    // const  = {
-    //   parentName,
-    //   email,
-    //   password,
 
-    //   childName,
-    //   grade,
-    // };
+    // Perform form validation
+    const errors = {};
+    if (!parentName.trim()) {
+      errors.parentName = 'Parent\'s Name is required.';
+    }
+
+    if (!email.trim()) {
+      errors.email = 'Email is required.';
+    }
+
+    if (!password.trim()) {
+      errors.password = 'Password is required.';
+    } else if (password !== confirmpassword) {
+      errors.confirmpassword = 'Passwords do not match.';
+    }
+
+    if (!selectedStudent) {
+      errors.selectedStudent = 'Please select a Student.';
+    }
+
+    if (!selectedGrade) {
+      errors.selectedGrade = 'Please select a Grade.';
+    }
+
+    // If there are errors, set the state and stop form submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    // If there are no errors, proceed with the form submission
+    const formData = {
+      parentName,
+      email,
+      password,
+      childName: selectedStudent,
+      grade: selectedGrade,
+    };
 
     // Send the form data to the backend API for registration
-    // You can use libraries like Axios or fetch to make the HTTP request
-    // Example: axios.post('/api/register', formData)
-    // Handle the backend response as needed
+    fetch('(http://localhost:5000/api/parent/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        "parentName": formData.get("parentName"),
+        "email": formData.get("email"),
+        "password": formData.get("password")
+      }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Registration successful:', data);
+
+      })
+      .catch((error) => {
+
+        console.error('Registration failed:', error.message);
+
+
+      });
   };
 
   return (
-    <div className="form-group">
-      <form className='container' onSubmit={handleSubmit}>
 
-        <div className="row justify-content-center">
-          <div>
-            <label>
-              Parent's Name:
-              <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
-            </label>
 
-          </div>
-          <div>
-            <label>
-              Email:
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </label>
-          </div>
-
-          <div>
-            <label>
-              Password:
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </label>
-          </div>
-
-          <br />
+    <form className='container' onSubmit={handleSubmit}>
+      <div className="form-group"></div>
+      <div className="row justify-content-center">
+        <div>
           <label>
-            Confirm Password:
-            <input type="  password " value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-
+            Parent's Name:
+            <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
           </label>
-
-
-          <br />
+          {formErrors.parentName && <p className="error">{formErrors.parentName}</p>}
+        </div>
+        <div>
           <label>
-            Student Name:
-            <select value={selectedStudent} onChange={handleStudentChange}>
-              <option value="">Select Student</option>
-              <option value="Child A">Student A</option>
-              <option value="Child B">Student B</option>
-              <option value="Child C">Student C</option>
-              <option value="Child D">Student D</option>
-              <option value="Child E">Student E</option>
-              <option value="Child B">Student F</option>
-              <option value="Child C">Student G</option>
-              <option value="Child D">Student H</option>
-              <option value="Child E">CStudent I</option>
-              {/* Add more options for each child */}
-            </select>
+            Email:
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
+          {formErrors.email && <p className="error">{formErrors.email}</p>}
+        </div>
+
+        <div>
+          <label>
+            Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </label>
+          {formErrors.password && <p className="error">{formErrors.password}</p>}
+        </div>
+
+        <br />
+        <label>
+          Confirm Password:
+          <input type="password" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        </label>
+        {formErrors.confirmpassword && <p className="error">{formErrors.confirmpassword}</p>}
+
+        <br />
 
 
-          <div>
+        <label>
+          Student Name:
+          <select name="selectedStudent" value={selectedStudent} onChange={handleStudentChange}>
+            <option value="">Select Student</option>
+            <option value="Child A">Student A</option>
+            <option value="Child B">Student B</option>
+            <option value="Child C">Student A</option>
+            <option value="Child D">Student B</option>
+
+
+
+
+            {/* Add more options for each child */}
+          </select>
+
+
+
+        </label>
+        {formErrors.selectedStudent && <p className="error">{formErrors.selectedStudent}</p>}
+
+        <div>
           <label>
             Grade:
-
-            <select value={selectedGrade} onChange={handleStudentChange}>
+            <select name="selectedGrade" value={selectedGrade} onChange={handleStudentChange}>
               <option value="">Select Class</option>
               <option value="Form 1">Form 1</option>
               <option value="Form 2">Form 2</option>
               <option value="Form 3">Form 3</option>
               <option value="Form 4">Form 4</option>
-
-           
             </select>
           </label>
-          </div>
 
-
-
-
-          {/* Other form inputs for password, child's name, grade, etc. */}
-          <div>
-            <Link to={"parent/parentmainpage"} ><button type="submit" className="btn btn-primary">
-              Register
-            </button> </Link>
-          </div>
+          {formErrors.selectedGrade && <p className="error">{formErrors.selectedGrade}</p>}
         </div>
 
-      </form>
-    </div>
+
+
+      </div>
+      <div>
+        <Link to={"/parent/parentsignin"} ><button type="submit" className="btn btn-primary" onClick={handleSubmit}>
+          Register
+        </button> </Link>
+      </div>
+    </form>
   );
-};
+}
+
 
 export default Parentregister;

@@ -31,8 +31,10 @@
   background-image: url(/public/images/homepic3.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
-  height: 500px;
+   background-position: right top;
+  margin-top: 0.2%;
+  height: 80vh;
+  width: 100%;
 }
 
 #welcome {
@@ -202,4 +204,100 @@ div {
   margin: 8px 0;
   box-sizing: border-box;
   background-color: aqua;
+}
+.work-section {
+  padding-top: 90px !important;
+  padding-bottom: 90px !important;
+  min-height: 850px;
+  background-color: transparent;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.work-section .container {
+  max-width: 1242px;
+}
+
+.tm-work-item-inner {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3px;
+} 
+
+
+
+.work-section .item.one {
+  margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+  .work-section .item.one {
+    margin-top: 0;
+  }
+}
+
+.work-section .item.two {
+  margin-top: 1px;
+}
+
+@media (max-width: 767px) {
+  .work-section .item.two {
+    margin-top: 0;
+  }
+}
+
+.work-section .item h3 {
+  color: #0a080a;
+  text-transform: uppercase;
+  font-size: 27px;
+  letter-spacing: -1px;
+  margin-bottom: 9px;
+}
+
+.work-section .item p {
+  color: #fff;
+  line-height: 31px;
+  margin-bottom: 0;
+}
+
+.work-section .title {
+  margin-top: 5px;
+  margin-left: 1px;
+  border-bottom: 1px solid #fff;
+}
+
+.work-section .title h2 {
+  color: #fff;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.containerposition {
+  display: flex;
+  justify-content: horizontal;
+  align-items: horizontal;
+}
+.column {
+  width: 50vh;
+  height: 50vh;
+  background-color: rgb(237, 229, 217, 0.8);
+  align-items: column;
+  justify-items: column;
+  float: right;
+  display: flex;
+}
+.aboutus {
+  display: flex;
+  flex-direction: column;
+  align-items: wrap;
+  position: left;
+  justify-items: left;
+  text-align: wrap;
+  width: 200vh;
+  height: 29vh;
+  margin: 0px;
+  shape-outside: ellipse(20% 50%);
+  clip-path: ellipse(22% 50%);
+  background: lightblue;
+  display: inline-block;
 }

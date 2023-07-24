@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ParentMainPage = ({ getStudentDetails }) => {
+const ParentMainPage = ({ getStudentDetails, isAuthenticated }) => {
   const [parentName, setParentName] = useState('');
   const [studentId, setStudentId] = useState('');
   const [studentDetails, setStudentDetails] = useState('');
@@ -9,12 +9,17 @@ const ParentMainPage = ({ getStudentDetails }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isAuthenticated) {
+      setError('Please sign in to access this page');
+      return;
+    }
+
     try {
       const response = await getStudentDetails(parentName, studentId);
       setStudentDetails(response);
       setError('');
     } catch (error) {
-      setError('Error retrieving student');
+      setError('Error retrieving student details');
       setStudentDetails('');
     }
   };
@@ -23,7 +28,7 @@ const ParentMainPage = ({ getStudentDetails }) => {
     <div className='container'>
       <h1>Parent Page</h1>
 
-      <form  className='container'     onSubmit={handleSubmit}>
+      <form className='container' onSubmit={handleSubmit}>
         <label>
           Parent Name:
           <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
