@@ -6,7 +6,7 @@ const teacherSchema = new mongoose.Schema({
  
   subjectsTaught: [String],
   teachersRemark: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
-  isAdmin:{type:Boolean,default:false},
+  isAdmin:{type:Boolean,default:true},
   encry_password:{
     type:String,
     required:true

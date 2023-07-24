@@ -1,59 +1,42 @@
 const express = require('express');
-const app= express();
 const mainpageRoutes = require('./routes/mainpage');
-const mongoose = require ('mongoose');
-const bodyParser=require('body-parser');
-const cookieParser=require('cookie-parser');
-const cors =require('cors');
-require("dotenv").config();
+const mongoose = require('mongoose');
+
+const app = express();
 
 
 //DB Connection
-mongoose.connect('mongodb+srv://vivyan3:burpee6@e-limu.pdudq6m.mongodb.net/',{
-useNewUrlParser:true,
-useUnifiedTopology:true,
+mongoose.connect('mongodb+srv://vivyan3:burpee6@e-limu.pdudq6m.mongodb.net/', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 
-}).then(()=>{
+}).then(() => {
     console.log("DB CONNECTED")
-}).catch(()=>{
+}).catch(() => {
     console.log("UNABLE TO CONNECT TO DB")
 })
 
-
+let DB = mongoose.connection
 
 
 
 
 
 //use parsing middleware
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(cors)
-
-
+app.use(express.json());
 
 //using routes
-app.use('/api/mainpage', mainpageRoutes);
+app.use('/api', mainpageRoutes);
 
 
-const port=process.env.PORT|| 5000;
-
-
-//routes
-app.get('/',(req,res)=>{
-res.send('hello')
- 
-})
-
-
-
+const port = process.env.PORT || 5000;
 
 
 
 //start a server
-app.listen(5000,()=>{
+app.listen(5000, () => {
 
-    console.log('listening at ${port}')
+    console.log(`listening at ${port}`)
 })
 
 

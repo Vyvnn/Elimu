@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import { Navigate } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ParentSignin = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
-        email:'',
+        email: '',
         password: ''
     });
 
+    const [authenticated, setAuthenticated] = useState(localStorage.getItem('authenticated') || false);
+    const [error, setError] = useState(null);
 
-   // eslint-disable-next-line
-const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
-  
-    const users = [{ name: "Jane", password: "testpassword" }];
+    const users = [{ name: 'Jane', password: 'testpassword' }];
     const account = users.find((user) => user.name === formData.name);
-
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -28,29 +24,42 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
         }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-      
-        if (account && account.password === formData.password) {
-          setauthenticated(true);
-          localStorage.setItem("authenticated", true);
-          navigate("/parentmainpage");
+        setError(null);
+
+        // Perform client-side validation
+        if (!formData.name || !formData.email || !formData.password) {
+            setError('All fields are required');
+            return;
         }
-        console.log(formData);
 
-        if (!authenticated) {
-            return <Navigate replace to="/login" />;
-          } else {
-            return (
-              <div>
-                <p>Welcome to your Dashboard</p>
-              </div>
-            );
-          }
-      };
-      
+        try {
+            const response = await fetch('/api/parent/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    "parentName": formData.get("parentName"),
+                    "password": formData.get("password")
+                }
+            });
+
+            if (response.ok) {
+                setAuthenticated(true);
+                localStorage.setItem('authenticated', true);
+                navigate('/parentmainpage');
+            } else {
+                const data = await response.json();
+                setError(data.message || 'Error occurred during registration');
+            }
+        } catch (error) {
+            setError('Failed to connect to the server. Please try again later.');
+        }
+    };
+
     return (
-
         <div className="container">
             <div className="row justify-content-center">
                 <div id="welcomeS">
@@ -65,9 +74,9 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
                                 type="text"
                                 name="name"
                                 className="form-control border border-dark rounded"
-                                placeholder=" enter username"
+                                placeholder="Enter username"
                                 required
-                                value={formData.parentsname}
+                                value={formData.name}
                                 onChange={handleChange}
                             />
                         </div>
@@ -77,9 +86,9 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
                                 type="text"
                                 name="email"
                                 className="form-control border border-dark rounded"
-                                placeholder=" enter email"
+                                placeholder="Enter email"
                                 required
-                                value={formData.parentsname}
+                                value={formData.email}
                                 onChange={handleChange}
                             />
                         </div>
@@ -90,27 +99,26 @@ const [authenticated, setauthenticated] = useState(localStorage.getItem(localSto
                                 name="password"
                                 className="form-control border border-dark rounded"
                                 placeholder="Password"
+                                required
                                 value={formData.password}
                                 onChange={handleChange}
                             />
                         </div>
-                        
 
                         <div>
-                        <Link to={"/parent/parentMainPage"} ><button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-primary">
                                 Sign in
-                            </button> </Link>
+                            </button>
                         </div>
                     </form>
-
+                    {error && <div className="alert alert-danger">{error}</div>}
                     <p>
-                        <a href="/parent/parentRegister">If not registered,please Signup</a>
+                        <Link to="/parent/parentRegister">If not registered, please Signup</Link>
                     </p>
                 </div>
             </div>
         </div>
     );
 };
-
 
 export default ParentSignin;

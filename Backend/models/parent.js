@@ -21,7 +21,7 @@ const parentSchema = new mongoose.Schema({
     required: true
   },
   salt: String,
-  student: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
+  student_Id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
 }, { timestamps: true });
 
 parentSchema.virtual("password")

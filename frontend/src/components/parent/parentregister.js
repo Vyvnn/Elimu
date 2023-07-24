@@ -64,12 +64,16 @@ const Parentregister = () => {
     };
 
     // Send the form data to the backend API for registration
-    fetch('(http://localhost:5000/api/mainpage', {
+    fetch('(http://localhost:5000/api/parent/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: {
+        "parentName": formData.get("parentName"),
+        "email": formData.get("email"),
+        "password": formData.get("password")
+      }
     })
       .then((response) => {
         if (!response.ok) {
