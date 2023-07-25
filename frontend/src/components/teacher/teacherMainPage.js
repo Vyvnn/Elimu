@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {AuthContext} from "./context"
 
 const TeacherPage = () => {
   const [students, setStudents] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {AuthContext} from "./context"
 const StudentMainPage = () => {
   const [studentName, setStudentName] = useState('');
   const [studentId, setStudentId] = useState('');
