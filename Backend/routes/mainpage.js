@@ -104,19 +104,19 @@ router.post("/student/signin", async (req, res) => {
 
     // Check if the student exists and the password matches
     if (!existingStudent || existingStudent.password !== password) {
-      return res.status(401).json({ message: "Invalid login credentials" });
+     throw Error ("Invalid login credentials");
     }
 
     // Student authentication successful
     // You can set the student as authenticated here if needed
-    const token = generateToken(student._id)
+    const token = generateToken(existingStudent._id)
 
     res.status(200).json({ message: "Student signin successful", token });
     console.log(token)
 
-  } catch (error) {
-    console.error("Error during student signin:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+  } catch(error){
+    res.status(400).json({error: error.message})
+
   }
 });
 

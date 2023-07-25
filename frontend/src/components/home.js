@@ -13,7 +13,7 @@ const Home = () => {
           A one stop shop bringing together parents, teachers and students.{" "}
         </h3>
         <Link to={"/profile"} id="welcomesignin">
-          <button id="welcomesignin">SIGN I</button>
+          <button id="welcomesignin">SIGN IN</button>
         </Link>
       </div>
       <section className="work-section section" >
