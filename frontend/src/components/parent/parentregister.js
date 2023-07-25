@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import {AuthContext} from "./context"
 const Parentregister = () => {
   const [parentName, setParentName] = useState('');
   const [email, setEmail] = useState('');

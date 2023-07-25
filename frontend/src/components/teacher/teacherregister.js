@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {AuthContext} from "./context"
 
 const TeacherRegister = () => {
     const [teacherName, setTeacherName] = useState("");

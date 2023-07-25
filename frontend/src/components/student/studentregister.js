@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-
+import {AuthContext} from "./context"
 const StudentRegister = () => {
   const [fullName, setFullName] = useState("");
   const [studentID, setStudentID] = useState("");

@@ -1,28 +1,48 @@
 import React, { useState } from 'react';
 import '../../index.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import {AuthContext} from "./context"
 
 const Studentsignin = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  });
+    const [studentNo, setStudentNo] = useState("");
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const [error, setError] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
+
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value
+  //   }));
+  // };
+
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    // Perform login logic here
-    // You can access form data from the 'formData' state
-    console.log(formData);
-  };
-
+    try {
+      setShowError(false)
+           const response = await axios.post("http://localhost:5000/api/student/signin", {
+            password, studentNo
+        });
+      const json = response.data;
+      localStorage.setItem("currentUser", JSON.stringify(json));
+      const user = json.user;
+      // dispatch({ type: "LOGIN", payload: json });
+      // setIsLoading(false);
+      console.log("login sucess");
+      navigate("/student/studentmainpage")
+         
+    } catch (error) {
+      setError(error.response.data.error)
+      setShowError(true)
+      console.log(error.response.data.error);
+    }}
+  
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -33,15 +53,15 @@ const Studentsignin = () => {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>StudentID:</label>
+              <label>StudentNo:</label>
               <input
                 type="text"
-                name="username"
+                name="studentNo"
                 className="form-control border border-dark rounded"
-                placeholder=" enter StudentID"
+                placeholder=" enter studentNo"
                 required
-                value={formData.StudentID}
-                onChange={handleChange}
+                value={studentNo}
+                onChange={(e) => setStudentNo(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -51,30 +71,29 @@ const Studentsignin = () => {
                 name="password"
                 className="form-control border border-dark rounded"
                 placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) =>
+                [setPassword(e.target.value)]}
               />
             </div>
         
 
 
             <div>
-              <Link to="/student/subjectsSelectPage"><button type="submit" className="btn btn-primary">
+             <button type="submit" className="btn btn-primary">
                 Sign in
               </button>
-              </Link>
+      
             </div>
           </form>
-
-     
-
-          <p>
+              <p>
             <a href="/student/studentregister">If not registered,please Signup</a>
           </p>
         </div>
       </div>
+     {showError && <p className='error'>{error}</p>}
     </div>
   );
-};
+  }
 
 export default Studentsignin;

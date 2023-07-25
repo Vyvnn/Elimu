@@ -16,7 +16,7 @@ import ParentMainPage from './components/parent/parentmainpage';
 import TeacherMainPage from './components/teacher/teacherMainPage';
 import SubjectSelectPage from './components/student/subjectsSelectPage';
 import ContactUs from './components/contact_Us';
-
+import context from './components/context'
 
 
 
