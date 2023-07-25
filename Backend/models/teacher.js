@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const teacherSchema = new mongoose.Schema({
-  name: { type: String, required: true, minlength: 3, maxlength: 30 },
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 30,
+  },
   email: {
     type: String,
     required: true,
@@ -10,9 +15,17 @@ const teacherSchema = new mongoose.Schema({
     unique: true,
   },
 
-  subjectsTaught: {type: String },
-  TSc_No: { type: Number, required: true },
-  isAdmin: { type: Boolean, default: true },
+  subjectsTaught: {
+    type: String
+  },
+  TSc_No: {
+    type: Number,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: true,
+  },
   password: {
     type: String,
     required: true,

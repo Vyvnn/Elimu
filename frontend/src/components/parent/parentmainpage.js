@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {AuthContext} from "./context"
+// import {AuthContext} from "./context"
 const ParentMainPage = ({ getStudentDetails, isAuthenticated }) => {
   const [parentName, setParentName] = useState('');
   const [studentId, setStudentId] = useState('');

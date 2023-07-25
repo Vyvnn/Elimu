@@ -1,28 +1,31 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const crypto = require("crypto");
 
 // Parent schema
-const parentSchema = new mongoose.Schema({
-  parentName: {
-    type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 30
+const parentSchema = new mongoose.Schema(
+  {
+    parentName: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 30,
+    },
+    email: {
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 200,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+
+    student_Id: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
   },
-  email: {
-    type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 200,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  
-  student_Id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }]
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 // parentSchema.virtual("password")
 //   .set(function(password) {
@@ -48,6 +51,6 @@ const parentSchema = new mongoose.Schema({
 //   }
 // };
 
-const Parent = mongoose.model('Parent', parentSchema);
+const Parent = mongoose.model("Parent", parentSchema);
 
 module.exports = Parent;

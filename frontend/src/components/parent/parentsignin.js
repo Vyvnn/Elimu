@@ -1,124 +1,101 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import {AuthContext} from "./context"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+// import {AuthContext} from "./context"
 const ParentSignin = () => {
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: ''
-    });
+  const [authenticated, setAuthenticated] = useState(
+    localStorage.getItem("authenticated") || false
+  );
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-    const [authenticated, setAuthenticated] = useState(localStorage.getItem('authenticated') || false);
-    const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
 
-    const users = [{ name: 'Jane', password: 'testpassword' }];
-    const account = users.find((user) => user.name === formData.name);
+  const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value
+  //   }));
+  // };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setError(null);
-
-        // Perform client-side validation
-        if (!formData.name || !formData.email || !formData.password) {
-            setError('All fields are required');
-            return;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      setShowError(false);
+      const response = await axios.post(
+        "http://localhost:5000/api/parent/signin",
+        {
+          password,
+          email,
         }
+      );
+      const json = response.data;
+      localStorage.setItem("currentUser", JSON.stringify(json));
+      const user = json.user;
+      // dispatch({ type: "LOGIN", payload: json });
+      // setIsLoading(false);
+      console.log("login success");
+      navigate("/parent/parentmainpage");
+    } catch (error) {
+      setError(error.response.data.error);
+      setShowError(true);
+      console.log(error.response.data.error);
+    }
+  };
 
-        try {
-            const response = await fetch('/api/parent/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: {
-                    "parentName": formData.get("parentName"),
-                    "password": formData.get("password")
-                }
-            });
-
-            if (response.ok) {
-                setAuthenticated(true);
-                localStorage.setItem('authenticated', true);
-                navigate('/parentmainpage');
-            } else {
-                const data = await response.json();
-                setError(data.message || 'Error occurred during registration');
-            }
-        } catch (error) {
-            setError('Failed to connect to the server. Please try again later.');
-        }
-    };
-
-    return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div id="welcomeS">
-                    <p>Welcome to</p>
-                    <h3>Elimu</h3>
-                </div>
-                <div className="col-md-6">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Parent's Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                className="form-control border border-dark rounded"
-                                placeholder="Enter username"
-                                required
-                                value={formData.name}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Email:</label>
-                            <input
-                                type="text"
-                                name="email"
-                                className="form-control border border-dark rounded"
-                                placeholder="Enter email"
-                                required
-                                value={formData.email}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Password: </label>
-                            <input
-                                type="password"
-                                name="password"
-                                className="form-control border border-dark rounded"
-                                placeholder="Password"
-                                required
-                                value={formData.password}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div>
-                            <button type="submit" className="btn btn-primary">
-                                Sign in
-                            </button>
-                        </div>
-                    </form>
-                    {error && <div className="alert alert-danger">{error}</div>}
-                    <p>
-                        <Link to="/parent/parentRegister">If not registered, please Signup</Link>
-                    </p>
-                </div>
-            </div>
+  return (
+    <div className="container">
+      <div className="row justify-content-center">
+        <div id="welcomeS">
+          <p>Welcome to</p>
+          <h3>Elimu</h3>
         </div>
-    );
-};
+        <div className="col-md-6">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="text"
+                name="email"
+                className="form-control border border-dark rounded"
+                placeholder="Enter email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                
+              />
+            </div>
+            <div className="form-group">
+              <label>Password: </label>
+              <input
+                type="password"
+                name="password"
+                className="form-control border border-dark rounded"
+                placeholder="Password"
+                required
+                value={password}
+                onChange={(e) => [setPassword(e.target.value)]}
+              />
+            </div>
 
+            <div>
+              <button type="submit" className="btn btn-primary">
+                Sign in
+              </button>
+            </div>
+          </form>
+          {error && <div className="alert alert-danger">{error}</div>}
+          <p>
+            <a href="/parent/parentregister">If not registered,please Signup</a>
+          </p>
+        </div>
+      </div>
+      {showError && <p className="error">{error}</p>}
+    </div>
+  );
+};
 export default ParentSignin;
