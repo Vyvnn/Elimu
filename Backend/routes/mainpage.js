@@ -3,6 +3,7 @@ const router = express.Router();
 const bcryptjs = require("bcryptjs");
 const Parent = require("../models/parent");
 const Student = require("../models/student");
+const Teacher = require("../models/teacher");
 const subject = require("../models/student");
 const parentController = require("../controllers/parentController");
 const studentController = require("../controllers/studentController");
@@ -20,29 +21,27 @@ router.get("/parent/details", function (req, res) {
 // ... (above code)
 
 router.post("/parent/signin", async (req, res) => {
-  const { parentName, password } = req.body;
-  console.log(parentName);
+  const { email, password } = req.body;
+  console.log(email);
 
   try {
-    // Find the parent by name in the database
-    const parent = await Parent.findOne({ parentName: parentName });
+    // Find the parent by email in the database
+    const parent = await Parent.findOne({ email: email });
 
     if (!parent) {
       return res.status(404).json({ message: "Parent not found" });
     }
 
     // Compare the entered password with the hashed password in the database
-    const passwordMatch = await bcryptjs.compare(
-      password,
-      parent.password
-    );
+    // const passwordMatch = await bcryptjs.compare(password, parent.password);
 
-    if (!passwordMatch) {
+    if (!password === parent.password) {
       return res.status(401).json({ message: "Invalid password" });
     }
-
-    // Parent signin successful, you can generate a JWT token or use session management here
-    res.status(200).json({ message: "Parent signin successful" });
+    else if (password === parent.password) {
+      // Parent signin successful, you can generate a JWT token or use session management here
+      res.status(200).json({ message: "Parent signin successful" });
+    }
   } catch (error) {
     console.error("Error during parent signin:", error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -69,11 +68,10 @@ router.post("/parent/register", async (req, res) => {
 
     // Create a new Parent document
     const parent = new Parent({
-      // password:hashPass,
-      parentName:parentName,
-      email:email,
-      student_Id:student_Id
-
+      password: password,
+      parentName: parentName,
+      email: email,
+      student_Id: student_Id,
     });
     console.log(parent);
     // Save the parent to the database
@@ -88,8 +86,26 @@ router.post("/parent/register", async (req, res) => {
 
 // Routes for the student
 
-router.post("/signin", function (req, res) {
-  studentController.studentSignIn;
+router.post("/student/signin", async (req, res) => {
+  const { studentNo, password } = req.body;
+
+  try {
+    // Find the student with the provided studentName
+    const existingStudent = await Student.findOne({ studentNo: studentNo });
+
+    // Check if the student exists and the password matches
+    if (!existingStudent || existingStudent.password !== password) {
+      return res.status(401).json({ message: "Invalid login credentials" });
+    }
+
+    // Student authentication successful
+    // You can set the student as authenticated here if needed
+
+    res.status(200).json({ message: "Student signin successful" });
+  } catch (error) {
+    console.error("Error during student signin:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 router.get("/page", function (req, res) {
@@ -101,25 +117,25 @@ router.post("/grade-remark", function (req, res) {
 });
 
 router.post("/student/register", async (req, res) => {
-  const { studentName, password } = req.body;
+  const { studentName, grade, password, studentNo } = req.body;
 
   try {
     // Check if the student with the provided email already exists
-    const existingStudent = await Student.findOne({ studentName: studentName });
+    const existingStudent = await Student.findOne({ studentNo: studentNo });
     if (existingStudent) {
       return res
         .status(400)
-        .json({ message: "Student with this email already exists" });
+        .json({ message: "Student already exists" });
     }
 
     // Create a new Student document
     const student = new Student({
       studentName,
-      subject,
-
+      grade,
       password,
+      studentNo
     });
-
+    console.log(student)
     // Save the student to the database
     await student.save();
 
@@ -132,9 +148,34 @@ router.post("/student/register", async (req, res) => {
 
 // Routes for the teacher
 
-router.post("/register", function (req, res) {
-  teacherController.registerTeacher;
+router.post("/teacher/register", async (req, res) =>{
+  const { name, email, subjectsTaught, TSc_No,password } = req.body
+
+  try {
+    // Check if the teacher with the provided email already exists
+    const existingTeacher = await Teacher.findOne({ TSc_No});
+    if (existingTeacher) {
+      return res
+        .status(400)
+        .json({ message: "Teacher already exists" });
+    }
+
+    // Create a new Student document
+    const teacher = new Teacher({
+      name, email, subjectsTaught, TSc_No,password
+    });
+
+    console.log(teacher)
+    // Save the student to the database
+    await teacher.save();
+
+    res.status(201).json({ message: "Teacher registration successful" });
+  } catch (error) {
+    console.error("Error during teacher registration:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
+
 router.get("/page", function (req, res) {
   teacherController.getTeacherPage;
 });
