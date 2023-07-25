@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import '../../index.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Studentsignin = () => {
     const [studentNo, setStudentNo] = useState("");
 
   const [password, setPassword] = useState("");
- 
+
+  const [error, setError] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
 
   // const handleChange = (event) => {
   //   const { name, value } = event.target;
@@ -20,6 +24,7 @@ const Studentsignin = () => {
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
+      setShowError(false)
            const response = await axios.post("http://localhost:5000/api/student/signin", {
             password, studentNo
         });
@@ -29,8 +34,11 @@ const Studentsignin = () => {
       // dispatch({ type: "LOGIN", payload: json });
       // setIsLoading(false);
       console.log("login sucess");
+      navigate("/student/studentmainpage")
          
     } catch (error) {
+      setError(error.response.data.error)
+      setShowError(true)
       console.log(error.response.data.error);
     }}
   
@@ -82,6 +90,7 @@ const Studentsignin = () => {
           </p>
         </div>
       </div>
+     {showError && <p className='error'>{error}</p>}
     </div>
   );
   }

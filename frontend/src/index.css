@@ -301,3 +301,8 @@ div {
   background: lightblue;
   display: inline-block;
 }
+.error{
+  color: ghostwhite;
+  background-color: rgb(209, 0, 10);
+  padding: 2%;
+}
