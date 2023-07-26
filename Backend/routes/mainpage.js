@@ -177,9 +177,7 @@ router.post("/student/register", async (req, res) => {
   
   router.post("/teacher/register", async (req, res) => {
     const { name, email, subjectsTaught, TSc_No, password } = req.body;
-
     console.log("Received request body:", req.body);
-
   if (!name || !email || !subjectsTaught || !TSc_No || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -211,11 +209,11 @@ router.post("/student/register", async (req, res) => {
 });
 
 router.post("/teacher/signin", async (req, res) => {
-  const { Tsc_No, password } = req.body;
+  const { TSc_No, password } = req.body;
 
   try {
     // Find the teacher with the provided Tsc No
-    const existingTeacher = await Teacher.findOne({ Tsc_No: Tsc_No });
+    const existingTeacher = await Teacher.findOne({ TSc_No: TSc_No });
 
     // Check if the teacher exists and the password matches
     if (!existingTeacher || existingTeacher.password !== password) {

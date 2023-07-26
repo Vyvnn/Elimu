@@ -1,26 +1,35 @@
 import React, { useState, useEffect } from 'react';
-// import {AuthContext} from "./context";
 
 const TeacherPage = () => {
-  const [students, setStudents] = useState([]);
+  const [student, setStudent] = useState([]);
   const [selectedStudentId, setSelectedStudentId] = useState('');
   const [grade, setGrade] = useState('');
+  const [name, setName] = useState('');
   const [remark, setRemark] = useState('');
 
-  // useEffect(() => {
-  //   fetchAllStudents();
-  // }, []);
+  const currentTeacher = JSON.parse(localStorage.getItem("currentUser"));
+ 
+  useEffect(() => {
+    // Get the user data from local storage
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.name) {
+      // If the user data exists and contains the name, set it in the state
+      setName(currentUser.name);
+    }
 
-  // const fetchAllStudents = () => {
-  //   fetch('/api/students')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setStudents(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching students:', error);
-  //     });
-  // };
+    fetchAllStudents(); // Call fetchAllStudents inside useEffect
+  }, []);
+
+  const fetchAllStudents = () => {
+    fetch('/api/students')
+      .then(response => response.json())
+      .then(data => {
+        setStudent(data); // Fix the state setter to setStudent
+      })
+      .catch(error => {
+        console.error('Error fetching students:', error);
+      });
+  };
 
   const handleStudentSelect = (e) => {
     setSelectedStudentId(e.target.value);
@@ -61,37 +70,13 @@ const TeacherPage = () => {
 
   return (
     <div>
-    <div className='container'>
-<h4>Welcom {}</h4>
-      <form  className='container'   onSubmit={handleUpdateGradeAndRemark}>
-        <label>
-          Select Student:
-          <select value={selectedStudentId} onChange={handleStudentSelect}>
-            <option value="">-- Select Student --</option>
-            {students.map((student) => (
-              <option key={student._id} value={student._id}>
-                {student.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <div>
-          <label>
-            Grade:
-            <input type="text" value={grade} onChange={handleGradeChange} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Remark:
-            <input type="text" value={remark} onChange={handleRemarkChange} />
-          </label>
-        </div>
-        <button type="submit">Update Grade and Remark</button>
-      </form>
+      <div className='container'>
+        <h2>Welcome, {currentTeacher?.existingTeacher?.Name}!</h2>
+        {/* Rest of the form and JSX */}
       </div>
     </div>
   );
 };
 
 export default TeacherPage;
+ 
