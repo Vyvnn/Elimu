@@ -18,6 +18,8 @@ const generateToken = (_id) => {
 // router.post('/parent/signin', function (req, res) {
 //   parentController.parentSignIn
 // });
+
+
 router.get("/parent/details", function (req, res) {
   parentController.getParentDetails;
 });
@@ -31,29 +33,20 @@ router.post("/parent/signin", async (req, res) => {
 
   try {
     // Find the parent by email in the database
-    const parent = await Parent.findOne({ email: email });
 
-    if (!parent) {
-      return res.status(404).json({ message: "Parent not found" });
+    const existingParent = await Parent.findOne({ email: email });
+
+    // Check if the student exists and the password matches
+    if (!existingParent || existingParent.password !== password) {
+      throw Error("Invalid login credentials");
     }
+    // Parent signin successful, you can generate a JWT token or use session management here
+    const token = generateToken(existingParent._id);
 
-    // Compare the entered password with the hashed password in the database
-    // const passwordMatch = await bcryptjs.compare(password, parent.password);
-
-    if (!password === parent.password) {
-      return res.status(401).json({ message: "Invalid password" });
-    } else if (password === parent.password) {
-      // Parent signin successful, you can generate a JWT token or use session management here 
-     const token = generateToken(parent._id)
-
-      res.status(200).json({ message: "Parent signin successful", token });
-      console.log(token)
-    }
-  
-
+    res.status(200).json({ message: "Parent signin successful", token });
+    console.log(token);
   } catch (error) {
-    console.error("Error during parent signin:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -104,19 +97,21 @@ router.post("/student/signin", async (req, res) => {
 
     // Check if the student exists and the password matches
     if (!existingStudent || existingStudent.password !== password) {
-     throw Error ("Invalid login credentials");
+      throw Error("Invalid login credentials");
     }
 
     // Student authentication successful
-    // You can set the student as authenticated here if needed
-    const token = generateToken(existingStudent._id)
 
-    res.status(200).json({ message: "Student signin successful", token });
-    console.log(token)
-
-  } catch(error){
-    res.status(400).json({error: error.message})
-
+    const responseObj = {
+      message: "Student signin successful",
+      token: generateToken(existingStudent._id),
+     // Add the student's name to the response
+    };
+    console.log("Response Object:", responseObj);
+    res.status(200).json({responseObj,existingStudent}); // Send the response object as JSON
+   
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -124,9 +119,25 @@ router.get("/page", function (req, res) {
   studentController.getStudentPage;
 });
 
-router.post("/grade-remark", function (req, res) {
-  studentController.getGradeAndRemark;
+// Fetch teacher data route
+router.post("/fetch-teacher-data", async (req, res) => {
+  const { studentName, studentId } = req.body;
+
+  try {
+    // Assuming you have a Teacher model with fields like remark, grade, and subject
+    const teacherData = await Teacher.findOne({ studentName, studentId });
+
+    if (!teacherData) {
+      throw Error("Teacher data not found");
+    }
+
+    // Send the teacher data in the response
+    res.status(200).json(teacherData);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
+
 
 router.post("/student/register", async (req, res) => {
   const { studentName, grade, password, studentNo } = req.body;
@@ -158,9 +169,16 @@ router.post("/student/register", async (req, res) => {
 
 // Routes for the teacher
 
-router.post("/teacher/register", async (req, res) => {
-  const { name, email, subjectsTaught, TSc_No, password } = req.body;
 
+  
+  router.post("/teacher/register", async (req, res) => {
+    const { name, email, subjectsTaught, TSc_No, password } = req.body;
+
+    console.log("Received request body:", req.body);
+
+  if (!name || !email || !subjectsTaught || !TSc_No || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
   try {
     // Check if the teacher with the provided email already exists
     const existingTeacher = await Teacher.findOne({ TSc_No });
@@ -197,20 +215,17 @@ router.post("/teacher/signin", async (req, res) => {
 
     // Check if the teacher exists and the password matches
     if (!existingTeacher || existingTeacher.password !== password) {
-      return res.status(401).json({ message: "Invalid login credentials" });
+      throw Error("Invalid login credentials");
     }
 
     // Teacher authentication successful
     // You can set the teacher as authenticated here if needed
-    const token = generateToken(student._id)
+    const token = generateToken(existingTeacher._id);
 
-    res.status(200).json({ message: "Teacher signin successful", token });
-    console.log(token)
-
-   
+    res.status(200).json({ message: "Teacher  signin successful", token });
+    console.log(token);
   } catch (error) {
-    console.error("Error during teacher  signin:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(400).json({ error: error.message });
   }
 });
 

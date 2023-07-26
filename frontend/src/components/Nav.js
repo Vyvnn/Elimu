@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 const Nav = () => {
+    const [thereisauser,setThereisauser]=useState(false)
+    useEffect(() => { const currentStudent = JSON.parse(localStorage.getItem("currentUser")); 
+
+    if (currentStudent) { setThereisauser(true); } }, []);
+
+
+    const logout=()=>{
+        localStorage.removeItem("currentUser")
+        setThereisauser(false)
+    }
     return (
         <nav className="navbar">
          
@@ -10,10 +20,10 @@ const Nav = () => {
             <div className="links">
             
                 <Link to='/'>Home</Link>
-                <Link to='/profile'>Profile</Link>
-                <Link to='parent/parentmainpage'>Parent</Link>
+                {thereisauser && <Link to=''onClick={logout}>Logout</Link>}
+                {/*<Link to='parent/parentmainpage'>Parent</Link>
                 <Link to='student/studentmainpage'>Student</Link>
-                <Link to='teacher/teacherMainPage'>Teacher</Link>
+                <Link to='teacher/teacherMainPage'>Teacher</Link> */}
 
                 <Link to='/contact_Us'>Contact Us</Link>
 

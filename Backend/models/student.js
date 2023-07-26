@@ -1,39 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
   studentName: {
     type: String,
-    required: true
+    required: true,
   },
- 
-   grade: {
+
+  grade: {
     type: Number,
-    default: null // Set the default value to null
+    default: null, // Set the default value to null
   },
 
-  password:{
-    type:String,
-    required:true
-      },
+    password: {
+    type: String,
+    required: true,
+  },
 
-      studentNo:{
-        type:Number,
-        required:true
-      }
-      // salt:String, 
-      
-      
+  studentNo: {
+    type: Number,
+    required: true,
+  },
+  // salt:String,
+
   //   },{timestamps:true});
   //   studentSchema.virtual("password")
   //   .set(function(epassword){
   //   _password=password
   //   salt= Math.random().toString(26).slice(2)
   //   this.encry_password = this.securePassword(epassword)
-  
+
   //   })
   //   .get(function(){
   //     return this._epassword
-    
+
   //   })
   //  studentSchema.methods={
   //     authenticate:function(plainpassword){
@@ -46,10 +45,8 @@ const studentSchema = new mongoose.Schema({
   //       }
   //      catch (err){
   //       return ""
-       }
-)
-  
+});
 
-const Student = mongoose.model('Student', studentSchema);
+const Student = mongoose.model("Student", studentSchema);
 
 module.exports = Student;

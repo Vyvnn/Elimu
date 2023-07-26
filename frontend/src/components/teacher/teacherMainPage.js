@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {AuthContext} from "./context"
+// import {AuthContext} from "./context";
 
 const TeacherPage = () => {
   const [students, setStudents] = useState([]);
@@ -7,20 +7,20 @@ const TeacherPage = () => {
   const [grade, setGrade] = useState('');
   const [remark, setRemark] = useState('');
 
-  useEffect(() => {
-    fetchAllStudents();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllStudents();
+  // }, []);
 
-  const fetchAllStudents = () => {
-    fetch('/api/students')
-      .then(response => response.json())
-      .then(data => {
-        setStudents(data);
-      })
-      .catch(error => {
-        console.error('Error fetching students:', error);
-      });
-  };
+  // const fetchAllStudents = () => {
+  //   fetch('/api/students')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setStudents(data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching students:', error);
+  //     });
+  // };
 
   const handleStudentSelect = (e) => {
     setSelectedStudentId(e.target.value);
@@ -49,7 +49,7 @@ const TeacherPage = () => {
     })
       .then(() => {
         // Success message or other UI update
-        fetchAllStudents();
+        // fetchAllStudents();
         setSelectedStudentId('');
         setGrade('');
         setRemark('');
@@ -62,7 +62,7 @@ const TeacherPage = () => {
   return (
     <div>
     <div className='container'>
-      <h3>Teacher Page</h3>
+<h4>Welcom {}</h4>
       <form  className='container'   onSubmit={handleUpdateGradeAndRemark}>
         <label>
           Select Student:
