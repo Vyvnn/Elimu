@@ -20,7 +20,7 @@ Vivian Muthoni
 
    
    
-## Technologirs Used
+## Technologies Used
    - Html
    - Css
    - Images
