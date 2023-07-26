@@ -21,9 +21,11 @@ import context from './components/context'
 
 
 function App() {
-  // const handleProfileSelection = (profile) => {
-  //   console.log(`Selected profile: ${profile}`);
-  // };
+  // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+// if(!currentUser){
+//   return()
+// }
+
   return (
     <div className="App">
       
@@ -34,22 +36,22 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={ <Profile/>}/>
 
-        <Route path="/student/studentsignin" element={<Studentsignin/>} />
-        <Route path="/parent/parentSignin" element={<ParentSignin/>}/>
-        <Route path="/teacher/teachersignin" element={<Teachersignin/>}/>
+        <Route path="/student/studentsignin" element={ <Studentsignin/>} />
+        <Route path="/parent/parentSignin" element={  <ParentSignin/>}/>
+        <Route path="/teacher/teachersignin" element={  <Teachersignin/>}/>
        
-        <Route path="/parent/parentRegister" element={<ParentRegister/>}/>
-        <Route path="/student/studentregister" element={<Studentregister/>}/>
-        <Route path="/teacher/teacherregister" element={<Teacherregister/>}/>
-        <Route path="/parent/parentmainpage" element={<ParentMainPage/>}/>
+        <Route path="/parent/parentRegister" element={ <ParentRegister/>}/>
+        <Route path="/student/studentregister" element={ <Studentregister/>}/>
+        <Route path="/teacher/teacherregister" element={ <Teacherregister/>}/>
+        <Route path="/parent/parentmainpage" element={ <ParentMainPage/>}/>
        
-        <Route path="/student/studentmainpage" element={<Studentmainpage/>}/>
-        <Route path="/teacher/teacherMainpage" element={<TeacherMainPage/>}/>
-        <Route path="/student/subjectsSelectPage" element={<SubjectSelectPage />} />
+        <Route path="/student/studentmainpage" element={ <Studentmainpage/>}/>
+        <Route path="/teacher/teacherMainpage" element={ <TeacherMainPage/>}/>
+        <Route path="/student/subjectsSelectPage" element={ <SubjectSelectPage />} />
 
-        <Route path="/contact_Us" element={<ContactUs />} />
+        <Route path="/contact_Us" element={ <ContactUs />} />
 
    
         {/* <AuthProvider>
