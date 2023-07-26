@@ -1,51 +1,34 @@
-import React, { useState } from 'react';
-// import {AuthContext} from "./context"
-const ParentMainPage = ({ getStudentDetails, isAuthenticated }) => {
+import React, { useEffect, useState } from "react";
+
+const ParentMainPage = () => {
+  const [parentData, setParentData] = useState(null);
   const [parentName, setParentName] = useState('');
-  const [studentId, setStudentId] = useState('');
-  const [studentDetails, setStudentDetails] = useState('');
-  const [error, setError] = useState('');
+  const currentParent = JSON.parse(localStorage.getItem("currentUser"));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!isAuthenticated) {
-      setError('Please sign in to access this page');
-      return;
+  useEffect(() => {
+    // Get the user data from local storage
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.name) {
+      // If the user data exists and contains the name, set it in the state
+      setParentName(currentUser.name);
     }
+    // Fetch parent details from the API
+    fetch(`/api/parents`)
+      .then((response) => response.json())
+      .then((data) => setParentData(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
-    try {
-      const response = await getStudentDetails(parentName, studentId);
-      setStudentDetails(response);
-      setError('');
-    } catch (error) {
-      setError('Error retrieving student details');
-      setStudentDetails('');
-    }
-  };
-
-  return (
-    <div className='container'>
-      <h1>Parent Page</h1>
-
-      <form className='container' onSubmit={handleSubmit}>
-        <label>
-          Parent Name:
-          <input type="text" value={parentName} onChange={(e) => setParentName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Student ID:
-          <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Get Student Details</button>
-      </form>
-
-      {studentDetails && <p>{studentDetails}</p>}
-      {error && <p>{error}</p>}
+  if (!parentData) {
+    // You can show a loading state while fetching the data
+    return (
+ 
+    <div>
+      <h2>Welcome, {currentParent.existingParent.parentName}!</h2>
+      <p>Student DETAILS: { parentData?.student_Id}</p>
     </div>
   );
+}
 };
 
 export default ParentMainPage;
