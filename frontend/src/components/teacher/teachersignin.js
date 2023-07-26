@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Teachersignin = () => {
-  const [Tsc_No, setTsc_No] = useState("");
+  const [TSc_No, setTSc_No] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -19,7 +19,7 @@ const Teachersignin = () => {
         "http://localhost:5000/api/teacher/signin",
         {
           password,
-          Tsc_No,
+          TSc_No,
         }
       );
       const json = response.data;
@@ -28,7 +28,7 @@ const Teachersignin = () => {
       // dispatch({ type: "LOGIN", payload: json });
       // setIsLoading(false);
       console.log("login success");
-      navigate("/teacher/teachermainpage");
+      navigate("/teacher/teacherMainPage");
 
     } catch (error) {
       setError(error.response.data.error);
@@ -57,8 +57,10 @@ const Teachersignin = () => {
                 className="form-control border border-dark rounded"
                 placeholder=" enter your TSC NO"
                 required
-                value={Tsc_No}
-                onChange={(e) => setTsc_No(e.target.value)}
+                value={TSc_No}
+                onChange={(e) =>{
+                  setShowError(false)
+                setTSc_No(e.target.value)} }
                
               />
             </div>

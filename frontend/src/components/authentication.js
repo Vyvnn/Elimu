@@ -1,23 +1,18 @@
-import React, { createContext, useState } from 'react';
+import { createContext } from "react";
 
+// Create the authentication context
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+// Authentication reducer function
+export const authReducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return { currentUser: action.payload };
 
-  const signIn = () => {
-    // Implement your sign-in logic here
-    setIsSignedIn(true);
-  };
+    case "LOGOUT":
+      return { currentUser: null };
 
-  const signOut = () => {
-    // Implement your sign-out logic here
-    setIsSignedIn(false);
-  };
-
-  return (
-    <AuthContext.Provider value={{ isSignedIn, signIn, signOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    default:
+      return state;
+  }
 };
