@@ -42,6 +42,7 @@ const ParentSignin = () => {
       navigate("/parent/parentmainpage");
     } catch (error) {
       setError(error.response.data.error);
+      
       setShowError(true);
       console.log(error.response.data.error);
     }

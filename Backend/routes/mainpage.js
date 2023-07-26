@@ -41,10 +41,14 @@ router.post("/parent/signin", async (req, res) => {
       throw Error("Invalid login credentials");
     }
     // Parent signin successful, you can generate a JWT token or use session management here
-    const token = generateToken(existingParent._id);
-
-    res.status(200).json({ message: "Parent signin successful", token });
-    console.log(token);
+    const responseObj = {
+      message: "Parent signin successful",
+      token: generateToken(existingParent._id),
+     // Add the student's name to the response
+    };
+    console.log("Response Object:", responseObj);
+    res.status(200).json({responseObj,existingParent}); // Send the response object as JSON
+   
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
