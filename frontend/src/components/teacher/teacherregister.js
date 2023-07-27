@@ -30,7 +30,7 @@ const TeacherRegister = ({ setAuthenticated }) => {
       }
       , {
         headers: {
-          'Content-Type': 'application/json', // Add Content-Type header for JSON data
+          'Content-Type': 'application/json', 
           
         },
       });
@@ -44,7 +44,7 @@ const TeacherRegister = ({ setAuthenticated }) => {
    const user = response.data.user;
 
     } catch (error) {
-      setError(error.response.data.error);
+      // setError(error.response.data.error);
 
       setShowError(true);
       console.log(error.response.data.error);

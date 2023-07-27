@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom';
 
 
 const ContactUs = () => {
@@ -22,15 +22,12 @@ const ContactUs = () => {
                     <div>
                     <li>
                         <h6>Street Address</h6>
-                        <span>online_app</span>
+                        <span>online</span>
                     </li>
                     </div>
-                    <div>
-                    <li>
-                        <h6>Website URL</h6>
-                        <span>www.elimu.org</span>
-                    </li>
-                    </div>
+                    {/* <div>
+                    <Link to='/contact_Us'>Contact Us</Link>
+                    </div> */}
                 </ul>
             </div>
         </div>

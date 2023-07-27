@@ -119,9 +119,6 @@ router.post("/student/signin", async (req, res) => {
   }
 });
 
-router.get("/page", function (req, res) {
-  studentController.getStudentPage;
-});
 
 // Fetch teacher data route
 router.post("/fetch-teacher-data", async (req, res) => {
@@ -175,39 +172,46 @@ router.post("/student/register", async (req, res) => {
 
 
   
-  router.post("/teacher/register", async (req, res) => {
-    const { name, email, subjectsTaught, TSc_No, password } = req.body;
-    console.log("Received request body:", req.body);
-  if (!name || !email || !subjectsTaught || !TSc_No || !password) {
-    return res.status(400).json({ message: "All fields are required" });
+router.post("/teacher/register", async (req, res) => {
+  const { name, email, subjectsTaught, TSc_No, password } = req.body;
+  console.log("Received request body:", req.body);
+if (!name || !email || !subjectsTaught || !TSc_No || !password) {
+  return res.status(400).json({ message: "All fields are required" });
+}
+try {
+  // Check if the teacher with the provided email already exists
+  const existingTeacher = await Teacher.findOne({ TSc_No });
+  if (existingTeacher) {
+    return res.status(400).json({ message: "Teacher already exists" });
   }
-  try {
-    // Check if the teacher with the provided email already exists
-    const existingTeacher = await Teacher.findOne({ TSc_No });
-    if (existingTeacher) {
-      return res.status(400).json({ message: "Teacher already exists" });
-    }
 
-    // Create a new Student document
-    const teacher = new Teacher({
-      name,
-      email,
-      subjectsTaught,
-      TSc_No,
-      password,
-    });
+  // Create a new teacher document
+  const teacher = new Teacher({
+    name,
+    email,
+    subjectsTaught,
+    TSc_No,
+    password,
+  });
 
-    console.log(teacher);
-    // Save the student to the database
-    await teacher.save();
-
-    res.status(201).json({ message: "Teacher registration successful" });
-  } catch (error) {
-    console.error("Error during teacher registration:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+  console.log(teacher);
+  
+      // Check if any teachers exist in the database
+  const teachersCount = await Teacher.countDocuments();
+  if (teachersCount === 0) {
+    // If no teachers exist, set the first teacher as admin
+    teacher.isAdmin = true;
   }
+
+  // Save the teacher to the database
+  await teacher.save();
+
+  res.status(201).json({ message: "Teacher registration successful" });
+} catch (error) {
+  console.error("Error during teacher registration:", error);
+  res.status(500).json({ message: "Internal Server Error" });
+}
 });
-
 router.post("/teacher/signin", async (req, res) => {
   const { TSc_No, password } = req.body;
 
