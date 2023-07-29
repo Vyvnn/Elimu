@@ -1,12 +1,14 @@
 // StudentRegistrationForm.js
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const StudentRegister = ({ teacherId }) => {
   const [studentName, setStudentName] = useState("");
   const [grade, setGrade] = useState("");
   const [password, setPassword] = useState("");
   const [studentNo, setStudentNo] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,9 +21,12 @@ const StudentRegister = ({ teacherId }) => {
       });
       // Handle successful student registration
       console.log("Student registration successful:", response.data);
+      
+      navigate("/student/studentsignin");
     } catch (error) {
       // Handle registration error
       console.error("Student registration failed:", error.response.data);
+     
     }
   };
 
