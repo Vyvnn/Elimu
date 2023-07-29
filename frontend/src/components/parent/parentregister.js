@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 const ParentRegistrationForm = ({ teacherId }) => {
   const [parentName, setParentName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [student_Id, setStudent_Id] = useState("");
-  
+  const navigate = useNavigate();
 
   
 
@@ -21,6 +21,7 @@ const ParentRegistrationForm = ({ teacherId }) => {
       });
       // Handle successful parent registration
       console.log("Parent registration successful:", response.data);
+      navigate("/parent/parentsignin");
     } catch (error) {
       // Handle registration error
       console.error("Parent registration failed:", error.response.data);
