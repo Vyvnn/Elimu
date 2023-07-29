@@ -19,13 +19,13 @@ const Nav = () => {
 
             <div className="links">
             
-                <Link to='/'>Home</Link>
+                
                 {thereisauser && <Link to=''onClick={logout}>Logout</Link>}
                 {/*<Link to='parent/parentmainpage'>Parent</Link>
                 <Link to='student/studentmainpage'>Student</Link>
                 <Link to='teacher/teacherMainPage'>Teacher</Link> */}
 
-                <Link to='/contact_Us'>Contact Us</Link>
+               
 
 
               

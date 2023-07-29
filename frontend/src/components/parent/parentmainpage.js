@@ -23,7 +23,7 @@ const ParentMainPage = () => {
     // You can show a loading state while fetching the data
     return (
  
-    <div>
+    <div className="container">
       <h2>Welcome, {currentParent.existingParent.parentName}!</h2>
       <p>Student DETAILS: { parentData?.student_Id}</p>
     </div>

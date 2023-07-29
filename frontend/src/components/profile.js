@@ -46,7 +46,7 @@ const Profile = () => {
       </Link> */}
       <button  id="profile"onClick={() => handleProfileSelection('parent')}>
       <img src="images/parent.png" alt=""  width="50" height="50"/>
-        <h3>PARENT/GUARDIAN</h3>
+        <h3>PARENT</h3>
       </button> 
       
       <br />

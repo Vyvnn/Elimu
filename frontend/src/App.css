@@ -23,11 +23,11 @@
   border-bottom: 1px clear;
   margin-top: 0%;
   height: 0.5vh;
-  position: sticky;
-  position: fixed;
+  /* position: sticky;
+  position: fixed; */
   top: 0;
   margin-bottom: 2%;
-  background-color: skyblue;
+  background-color:transparent;
 }
 
 .nav-item {

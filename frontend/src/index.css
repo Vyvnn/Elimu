@@ -210,8 +210,7 @@ div {
   padding-bottom: 90px !important;
   min-height: 850px;
   background-color: transparent;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+ 
 }
 
 .work-section .container {
@@ -274,6 +273,8 @@ div {
 }
 .containerposition {
   display: flex;
+  flex-direction: column;
+ 
   justify-content: horizontal;
   align-items: horizontal;
 }
