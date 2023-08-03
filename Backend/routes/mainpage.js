@@ -207,14 +207,15 @@ try {
   if (existingTeacher) {
     return res.status(400).json({ message: "Teacher already exists" });
   }
-
+  const salt = await bcryptjs.genSalt(10);
+  const hashPass=await bcryptjs.hash(password,salt);
   // Create a new teacher document
   const teacher = new Teacher({
     name,
     email,
     subjectsTaught,
     TSc_No,
-    password,
+    password:hashPass,
   });
 
   console.log(teacher);
@@ -242,8 +243,9 @@ router.post("/teacher/signin", async (req, res) => {
     // Find the teacher with the provided Tsc No
     const existingTeacher = await Teacher.findOne({ TSc_No: TSc_No });
 
+    const passMatch= await bcryptjs.compare(password, existingTeacher.password)
     // Check if the teacher exists and the password matches
-    if (!existingTeacher || existingTeacher.password !== password) {
+    if (!passMatch) {
       throw Error("Invalid login credentials");
     }
 
@@ -251,8 +253,8 @@ router.post("/teacher/signin", async (req, res) => {
     // You can set the teacher as authenticated here if needed
     const token = generateToken(existingTeacher._id);
 
-    res.status(200).json({ message: "Teacher  signin successful", token });
-    console.log(token);
+    res.status(200).json({ message: "Teacher  signin successful", token,existingTeacher });
+    console.log(token, existingTeacher);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
