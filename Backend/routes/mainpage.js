@@ -25,12 +25,12 @@ router.get("/parent/details", function (req, res) {
 });
 
 // routes/parentRoutes.js
-// ... (above code)
+
 
 router.post("/parent/signin", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email);
-
+  console.log(password);
+  console.log("Request body:", req.body);
   try {
 
     if (!email || !password){
@@ -39,9 +39,12 @@ router.post("/parent/signin", async (req, res) => {
     // Find the parent by email in the database
 
     const existingParent = await Parent.findOne({ email: email });
+    console.log('existingParent'+ existingParent);
+
+    const passMatch= await bcryptjs.compare(password, existingParent.password)
 
     // Check if the student exists and the password matches
-    if (!existingParent || existingParent.password !== password) {
+    if (!existingParent || !passMatch) {
       throw Error("Invalid login credentials");
     }
     // Parent signin successful, you can generate a JWT token or use session management here
@@ -78,15 +81,15 @@ router.post("/parent/register", async (req, res) => {
         .status(400)
         .json({ message: "Parent with this email already exists" });
     }
-    if (!validator.isStrongPassword(password)){
-      throw Error("That password is too weak")
-      }
+    // if (!validator.isStrongPassword(password)){
+    //   throw Error("That password is too weak")
+    //   }
     const salt = await bcryptjs.genSalt(10);
     const hashPass=await bcryptjs.hash(password,salt);
 
     // Create a new Parent document
     const parent = new Parent({
-      password: password,
+      password: hashPass,
       parentName: parentName,
       email: email,
       student_Id: student_Id,
@@ -108,11 +111,13 @@ router.post("/student/signin", async (req, res) => {
   const { studentNo, password } = req.body;
 
   try {
+
     // Find the student with the provided studentName
     const existingStudent = await Student.findOne({ studentNo: studentNo });
 
+const passMatch= await bcryptjs.compare(password, existingStudent.password)
     // Check if the student exists and the password matches
-    if (!existingStudent || existingStudent.password !== password) {
+    if (!passMatch) {
       throw Error("Invalid login credentials");
     }
 
@@ -121,6 +126,7 @@ router.post("/student/signin", async (req, res) => {
     const responseObj = {
       message: "Student signin successful",
       token: generateToken(existingStudent._id),
+      existingStudent
      // Add the student's name to the response
     };
     console.log("Response Object:", responseObj);
@@ -156,17 +162,22 @@ router.post("/student/register", async (req, res) => {
   const { studentName, grade, password, studentNo } = req.body;
 
   try {
+    if (!studentName || !password || !studentNo || !grade){
+      throw Error("All fields are required")
+    } 
+
     // Check if the student with the provided email already exists
     const existingStudent = await Student.findOne({ studentNo: studentNo });
     if (existingStudent) {
       return res.status(400).json({ message: "Student already exists" });
     }
-
+    const salt = await bcryptjs.genSalt(10);
+    const hashPass=await bcryptjs.hash(password,salt);
     // Create a new Student document
     const student = new Student({
       studentName,
       grade,
-      password,
+      password:hashPass,
       studentNo,
     });
     console.log(student);
@@ -196,14 +207,15 @@ try {
   if (existingTeacher) {
     return res.status(400).json({ message: "Teacher already exists" });
   }
-
+  const salt = await bcryptjs.genSalt(10);
+  const hashPass=await bcryptjs.hash(password,salt);
   // Create a new teacher document
   const teacher = new Teacher({
     name,
     email,
     subjectsTaught,
     TSc_No,
-    password,
+    password:hashPass,
   });
 
   console.log(teacher);
@@ -231,8 +243,9 @@ router.post("/teacher/signin", async (req, res) => {
     // Find the teacher with the provided Tsc No
     const existingTeacher = await Teacher.findOne({ TSc_No: TSc_No });
 
+    const passMatch= await bcryptjs.compare(password, existingTeacher.password)
     // Check if the teacher exists and the password matches
-    if (!existingTeacher || existingTeacher.password !== password) {
+    if (!passMatch) {
       throw Error("Invalid login credentials");
     }
 
@@ -240,8 +253,8 @@ router.post("/teacher/signin", async (req, res) => {
     // You can set the teacher as authenticated here if needed
     const token = generateToken(existingTeacher._id);
 
-    res.status(200).json({ message: "Teacher  signin successful", token });
-    console.log(token);
+    res.status(200).json({ message: "Teacher  signin successful", token,existingTeacher });
+    console.log(token, existingTeacher);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -33,7 +33,7 @@ to be update once hosted
 
 ## Contact Information 
 - Email: vivyan3@gmail.com
-- Phone no: 0710437281
+
 
 
 
