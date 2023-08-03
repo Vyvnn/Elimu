@@ -21,27 +21,21 @@ Vivian Muthoni
    
    
 ## Technologies Used
-   - Html
-   - Css
-   - Images
-   - Javascript
+ 
+  
    - React.js
    - Express
    - Node.js
     - Mongodb
 
 ## Live Link
-https://github.com/Vyvnn/Elimu.git
+to be update once hosted 
 
 ## Contact Information 
-### Phone Number
-- 000 222 444
+- Email: vivyan3@gmail.com
+- Phone no: 0710437281
 
-### Email Address
-- info@elimu.org
 
-### Street Address
-- online
 
-## Lincence and Copyright Information
+## Licence and Copyright Information
    (c) 2023 ElimuApp

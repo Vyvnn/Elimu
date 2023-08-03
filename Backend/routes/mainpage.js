@@ -32,6 +32,10 @@ router.post("/parent/signin", async (req, res) => {
   console.log(email);
 
   try {
+
+    if (!email || !password){
+      throw Error("All fields must be filled")
+    } 
     // Find the parent by email in the database
 
     const existingParent = await Parent.findOne({ email: email });
@@ -55,12 +59,17 @@ router.post("/parent/signin", async (req, res) => {
 });
 
 // // routes/parentRoutes.js
-// // ... (above code)
+
 
 router.post("/parent/register", async (req, res) => {
   const { parentName, email, password, student_Id } = req.body;
 
   try {
+    //fill all fields
+    if (!parentName || !password || !email || !student_Id){
+      throw Error("All fields must be filled")
+    } 
+   
     // Check if the parent with the provided email already exists
     const existingParent = await Parent.findOne({ email: email });
     console.log(existingParent);
@@ -69,8 +78,11 @@ router.post("/parent/register", async (req, res) => {
         .status(400)
         .json({ message: "Parent with this email already exists" });
     }
-    // const salt = await bcryptjs.genSalt(10);
-    // const hashPass=await bcryptjs.hash(password,salt);
+    if (!validator.isStrongPassword(password)){
+      throw Error("That password is too weak")
+      }
+    const salt = await bcryptjs.genSalt(10);
+    const hashPass=await bcryptjs.hash(password,salt);
 
     // Create a new Parent document
     const parent = new Parent({
