@@ -29,8 +29,8 @@ router.get("/parent/details", function (req, res) {
 
 router.post("/parent/signin", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email);
-
+  console.log(password);
+  console.log("Request body:", req.body);
   try {
 
     if (!email || !password){
@@ -39,9 +39,12 @@ router.post("/parent/signin", async (req, res) => {
     // Find the parent by email in the database
 
     const existingParent = await Parent.findOne({ email: email });
+    console.log('existingParent'+ existingParent);
+
+    const passMatch= await bcryptjs.compare(password, existingParent.password)
 
     // Check if the student exists and the password matches
-    if (!existingParent || existingParent.password !== password) {
+    if (!existingParent || !passMatch) {
       throw Error("Invalid login credentials");
     }
     // Parent signin successful, you can generate a JWT token or use session management here
@@ -78,15 +81,15 @@ router.post("/parent/register", async (req, res) => {
         .status(400)
         .json({ message: "Parent with this email already exists" });
     }
-    if (!validator.isStrongPassword(password)){
-      throw Error("That password is too weak")
-      }
+    // if (!validator.isStrongPassword(password)){
+    //   throw Error("That password is too weak")
+    //   }
     const salt = await bcryptjs.genSalt(10);
     const hashPass=await bcryptjs.hash(password,salt);
 
     // Create a new Parent document
     const parent = new Parent({
-      password: password,
+      password: hashPass,
       parentName: parentName,
       email: email,
       student_Id: student_Id,
