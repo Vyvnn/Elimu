@@ -25,7 +25,7 @@ router.get("/parent/details", function (req, res) {
 });
 
 // routes/parentRoutes.js
-// ... (above code)
+
 
 router.post("/parent/signin", async (req, res) => {
   const { email, password } = req.body;
@@ -111,11 +111,13 @@ router.post("/student/signin", async (req, res) => {
   const { studentNo, password } = req.body;
 
   try {
+
     // Find the student with the provided studentName
     const existingStudent = await Student.findOne({ studentNo: studentNo });
 
+const passMatch= await bcryptjs.compare(password, existingStudent.password)
     // Check if the student exists and the password matches
-    if (!existingStudent || existingStudent.password !== password) {
+    if (!passMatch) {
       throw Error("Invalid login credentials");
     }
 
@@ -124,6 +126,7 @@ router.post("/student/signin", async (req, res) => {
     const responseObj = {
       message: "Student signin successful",
       token: generateToken(existingStudent._id),
+      existingStudent
      // Add the student's name to the response
     };
     console.log("Response Object:", responseObj);
@@ -159,17 +162,22 @@ router.post("/student/register", async (req, res) => {
   const { studentName, grade, password, studentNo } = req.body;
 
   try {
+    if (!studentName || !password || !studentNo || !grade){
+      throw Error("All fields are required")
+    } 
+
     // Check if the student with the provided email already exists
     const existingStudent = await Student.findOne({ studentNo: studentNo });
     if (existingStudent) {
       return res.status(400).json({ message: "Student already exists" });
     }
-
+    const salt = await bcryptjs.genSalt(10);
+    const hashPass=await bcryptjs.hash(password,salt);
     // Create a new Student document
     const student = new Student({
       studentName,
       grade,
-      password,
+      password:hashPass,
       studentNo,
     });
     console.log(student);
