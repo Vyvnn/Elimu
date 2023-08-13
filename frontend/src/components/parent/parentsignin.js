@@ -9,18 +9,9 @@ const ParentSignin = () => {
   );
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
   const [error, setError] = useState(null);
-
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value
-  //   }));
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,15 +27,18 @@ const ParentSignin = () => {
       const json = response.data;
       localStorage.setItem("currentUser", JSON.stringify(json));
       const user = json.user;
-      // dispatch({ type: "LOGIN", payload: json });
-      // setIsLoading(false);
       console.log("login success");
       navigate("/parent/parentmainpage");
     } catch (error) {
-      setError(error.response.data.error);
-      
-      setShowError(true);
-      console.log(error.response.data.error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+        setShowError(true);
+        console.log(error.response.data.error);
+      } else {
+        setError("wrong credentials.");
+        setShowError(true);
+        console.log("An error occurred during sign-in.", error);
+      }
     }
   };
 
@@ -67,7 +61,6 @@ const ParentSignin = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                
               />
             </div>
             <div className="form-group">
@@ -89,7 +82,7 @@ const ParentSignin = () => {
               </button>
             </div>
           </form>
-          {error && <div className="alert alert-danger">{error}</div>}
+
           <p>
             <a href="/parent/parentregister">If not registered,please Signup</a>
           </p>

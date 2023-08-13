@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const StudentRegister = ({ teacherId }) => {
   const [studentName, setStudentName] = useState("");
   const [grade, setGrade] = useState("");
   const [password, setPassword] = useState("");
   const [studentNo, setStudentNo] = useState("");
+  const [error, setError] = useState(false);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -24,17 +27,20 @@ const StudentRegister = ({ teacherId }) => {
       
       navigate("/student/studentsignin");
     } catch (error) {
-      // Handle registration error
-      console.error("Student registration failed:", error.response.data);
-     
+      if (error.response && error.response.data && error.response.data.error) {
+        setShowError(true);
+        console.log(error.response.data.error);
+      } else {
+        setShowError(true);
+        console.log("An error occurred during registration:", error);
+      }
     }
-  };
-
+  }
   return (
     <div className="container">
       <h2>Student Registration</h2>
       <form onSubmit={handleSubmit}>
-        {/* Student registration form fields */}
+    
         <div>
           <label>Student Name:</label>
           <input

@@ -17,7 +17,7 @@ const TeacherRegister = ({ setAuthenticated }) => {
   const handleSubmit = async (event) => {
     
     event.preventDefault();
-    console.log("Form data before submission:", { name, email, subjectsTaught, TSc_No, password });
+    // console.log("Form data before submission:", { name, email, subjectsTaught, TSc_No, password });
     try {
       // Send teacher registration data to the server
       setShowError(false);
@@ -37,19 +37,22 @@ const TeacherRegister = ({ setAuthenticated }) => {
       
       // Handle successful teacher registration
       console.log("Teacher registration successful:", response.data);
-          navigate("/teacher/teachersignin");
+          navigate("/teacher/teachersigin");
       setAuthenticated(true); // Set the teacher as authenticated
    // Save the user data to localStorage
    localStorage.setItem("currentUser", JSON.stringify(response.data));
    const user = response.data.user;
 
-    } catch (error) {
-      // setError(error.response.data.error);
-
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.error) {
       setShowError(true);
       console.log(error.response.data.error);
+    } else {
+      setShowError(true);
+      console.log("An error occurred during registration:", error);
     }
-  };     
+  }
+}
 
 
   return (
