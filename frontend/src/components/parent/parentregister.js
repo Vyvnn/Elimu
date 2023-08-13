@@ -6,6 +6,8 @@ const ParentRegistrationForm = ({ teacherId }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [student_Id, setStudent_Id] = useState("");
+  const [error, setError] = useState(false);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   
@@ -23,10 +25,15 @@ const ParentRegistrationForm = ({ teacherId }) => {
       console.log("Parent registration successful:", response.data);
       navigate("/parent/parentsignin");
     } catch (error) {
-      // Handle registration error
-      console.error("Parent registration failed:", error.response.data);
+      if (error.response && error.response.data && error.response.data.error) {
+        setShowError(true);
+        console.log(error.response.data.error);
+      } else {
+        setShowError(true);
+        console.log("An error occurred during registration:", error);
+      }
     }
-  };
+  }
 
   return (
     <div className="container">

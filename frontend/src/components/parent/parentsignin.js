@@ -9,18 +9,9 @@ const ParentSignin = () => {
   );
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
   const [error, setError] = useState(null);
-
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value
-  //   }));
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,7 +41,6 @@ const ParentSignin = () => {
       }
     }
   };
-  
 
   return (
     <div className="container">
@@ -71,7 +61,6 @@ const ParentSignin = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                
               />
             </div>
             <div className="form-group">
@@ -93,7 +82,7 @@ const ParentSignin = () => {
               </button>
             </div>
           </form>
-       
+
           <p>
             <a href="/parent/parentregister">If not registered,please Signup</a>
           </p>

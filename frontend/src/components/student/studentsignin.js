@@ -16,13 +16,7 @@ const Studentsignin = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value
-  //   }));
-  // };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,8 +32,7 @@ const Studentsignin = () => {
       const json = response.data;
       localStorage.setItem("currentUser", JSON.stringify(json));
       const user = json.user;
-      // dispatch({ type: "LOGIN", payload: json });
-      // setIsLoading(false);
+      
       console.log("login success");
       navigate("/student/studentmainpage");
    
