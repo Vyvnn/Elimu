@@ -36,17 +36,21 @@ const ParentSignin = () => {
       const json = response.data;
       localStorage.setItem("currentUser", JSON.stringify(json));
       const user = json.user;
-      // dispatch({ type: "LOGIN", payload: json });
-      // setIsLoading(false);
       console.log("login success");
       navigate("/parent/parentmainpage");
     } catch (error) {
-      setError(error.response.data.error);
-      
-      setShowError(true);
-      console.log(error.response.data.error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+        setShowError(true);
+        console.log(error.response.data.error);
+      } else {
+        setError("wrong credentials.");
+        setShowError(true);
+        console.log("An error occurred during sign-in.", error);
+      }
     }
   };
+  
 
   return (
     <div className="container">
@@ -89,7 +93,7 @@ const ParentSignin = () => {
               </button>
             </div>
           </form>
-          {error && <div className="alert alert-danger">{error}</div>}
+       
           <p>
             <a href="/parent/parentregister">If not registered,please Signup</a>
           </p>

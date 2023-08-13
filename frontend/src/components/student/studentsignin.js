@@ -42,13 +42,19 @@ const Studentsignin = () => {
       // setIsLoading(false);
       console.log("login success");
       navigate("/student/studentmainpage");
-    } catch (error) {
+   
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.error) {
       setError(error.response.data.error);
       setShowError(true);
       console.log(error.response.data.error);
+    } else {
+      setError("wrong credentials.");
+      setShowError(true);
+      console.log("An error occurred during sign-in.", error);
     }
   };
-
+  }
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -99,5 +105,6 @@ const Studentsignin = () => {
     </div>
   );
 };
+
 
 export default Studentsignin;
