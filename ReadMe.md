@@ -21,15 +21,13 @@ Vivian Muthoni
    
    
 ## Technologies Used
- 
-  
    - React.js
    - Express
    - Node.js
-    - Mongodb
+   - Mongodb
 
 ## Live Link
-to be update once hosted 
+http://ec2-54-144-24-221.compute-1.amazonaws.com/ 
 
 ## Contact Information 
 - Email: vivyan3@gmail.com
