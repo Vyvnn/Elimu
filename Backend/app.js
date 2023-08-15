@@ -1,7 +1,8 @@
+const path = require("path");
 const express = require('express');
 const mainpageRoutes = require('./routes/mainpage');
 const mongoose = require('mongoose');
-const cors = require('cors'); // Import the cors package
+const cors = require('cors'); 
 
 const app = express();
 
@@ -24,6 +25,17 @@ app.use(express.json());
 
 // Enable CORS for all routes
 app.use(cors());
+
+// Serve static files from the frontend build folder
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+// Route all GET requests to the index.html file
+app.get("*", (req, res) => {
+
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+
+});
+
 
 // Using routes
 app.use('/api', mainpageRoutes);
